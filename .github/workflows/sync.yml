@@ -1,0 +1,103 @@
+name: Calendar Sync
+
+on:
+  schedule:
+    # Run nightly at 2am UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    # Allow manual trigger from GitHub Actions UI
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+      pages: 'write'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create Google Calendar credentials file
+        run: echo '${{ secrets.GOOGLE_CALENDAR_CREDENTIALS }}' > cal-creds.json
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CALENDAR_CREDENTIALS }}'
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: '>= 363.0.0'
+
+      - name: Download database from GCS
+        run: |
+          mkdir -p data
+          gsutil cp gs://bikegroups-org/calendar_sync_db/calendar_sync.db ./data/calendar_sync.db || echo "No existing database, starting fresh"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          python-version: "3.13"
+        env:
+          UV_NO_DEV: "true"
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Run calendar sync
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: uv run calendar-sync process
+
+      - name: Display logs
+        if: always()
+        run: |
+          if [ -d "logs" ] && [ "$(ls -A logs 2>/dev/null)" ]; then
+            echo "=== Processing Logs ==="
+            for log in logs/*; do
+              echo ""
+              echo "=== $log ==="
+              cat "$log"
+            done
+          else
+            echo "No logs found"
+          fi
+
+      - name: Generate report
+        if: always()
+        run: |
+          mkdir -p _site
+          uv run calendar-sync report -o _site/index.html
+
+      - name: Upload database to GCS
+        if: always()
+        run: |
+          if [ -f "./data/calendar_sync.db" ]; then
+            gsutil cp ./data/calendar_sync.db gs://bikegroups-org/calendar_sync_db/calendar_sync.db
+          else
+            echo "No database file to upload"
+          fi
+
+      - name: Upload Pages artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: sync
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      pages: 'write'
+      id-token: 'write'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

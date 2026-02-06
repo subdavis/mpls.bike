@@ -1,0 +1,175 @@
+"""SQLite database for tracking processed posts."""
+
+import sqlite3
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Optional
+
+from .models import Action
+
+
+def get_db_path() -> Path:
+    """Get the database file path."""
+    return Path(__file__).parent.parent / "data" / "calendar_sync.db"
+
+
+def init_db() -> None:
+    """Initialize the database schema."""
+    db_path = get_db_path()
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS processed_posts (
+            post_guid TEXT PRIMARY KEY,
+            processed_at TEXT NOT NULL,
+            decision TEXT NOT NULL,
+            calendar_event_id TEXT,
+            reasoning TEXT,
+            input_tokens INTEGER,
+            output_tokens INTEGER,
+            cost_usd REAL,
+            post_title TEXT,
+            post_author TEXT,
+            post_time TEXT,
+            post_link TEXT
+        )
+    """)
+
+    # Migrate existing DBs: add new columns if missing
+    cursor.execute("PRAGMA table_info(processed_posts)")
+    existing_columns = {row[1] for row in cursor.fetchall()}
+    for col in ["post_title", "post_author", "post_time", "post_link"]:
+        if col not in existing_columns:
+            cursor.execute(f"ALTER TABLE processed_posts ADD COLUMN {col} TEXT")
+
+    conn.commit()
+    conn.close()
+
+
+def is_processed(post_guid: str) -> bool:
+    """Check if a post has already been processed."""
+    conn = sqlite3.connect(get_db_path())
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT 1 FROM processed_posts WHERE post_guid = ?",
+        (post_guid,),
+    )
+    result = cursor.fetchone() is not None
+
+    conn.close()
+    return result
+
+
+def get_processed(post_guid: str) -> dict | None:
+    """Get the processing record for a post."""
+    conn = sqlite3.connect(get_db_path())
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT * FROM processed_posts WHERE post_guid = ?",
+        (post_guid,),
+    )
+    row = cursor.fetchone()
+
+    conn.close()
+    return dict(row) if row else None
+
+
+def record_processed(
+    post_guid: str,
+    decision: Action,
+    calendar_event_id: Optional[str] = None,
+    reasoning: Optional[str] = None,
+    input_tokens: int = 0,
+    output_tokens: int = 0,
+    cost_usd: float = 0.0,
+    post_title: Optional[str] = None,
+    post_author: Optional[str] = None,
+    post_time: Optional[str] = None,
+    post_link: Optional[str] = None,
+) -> None:
+    """Record that a post has been processed."""
+    conn = sqlite3.connect(get_db_path())
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        INSERT OR REPLACE INTO processed_posts
+        (post_guid, processed_at, decision, calendar_event_id, reasoning, input_tokens, output_tokens, cost_usd, post_title, post_author, post_time, post_link)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """,
+        (
+            post_guid,
+            datetime.now(timezone.utc).isoformat(),
+            decision.value,
+            calendar_event_id,
+            reasoning,
+            input_tokens,
+            output_tokens,
+            cost_usd,
+            post_title,
+            post_author,
+            post_time,
+            post_link,
+        ),
+    )
+
+    conn.commit()
+    conn.close()
+
+
+def delete_processed(post_guid: str) -> bool:
+    """Delete a processing record so the post can be re-processed.
+
+    Returns True if a record was deleted, False if not found.
+    """
+    conn = sqlite3.connect(get_db_path())
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "DELETE FROM processed_posts WHERE post_guid = ?",
+        (post_guid,),
+    )
+    deleted = cursor.rowcount > 0
+
+    conn.commit()
+    conn.close()
+    return deleted
+
+
+def get_history(limit: int = 20) -> list[dict]:
+    """Get recent processing history."""
+    conn = sqlite3.connect(get_db_path())
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT *
+        FROM processed_posts
+        ORDER BY processed_at DESC
+        LIMIT ?
+        """,
+        (limit,),
+    )
+    rows = cursor.fetchall()
+
+    conn.close()
+    return [dict(row) for row in rows]
+
+
+def get_total_cost() -> float:
+    """Get total cost across all processed posts."""
+    conn = sqlite3.connect(get_db_path())
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COALESCE(SUM(cost_usd), 0) FROM processed_posts")
+    result = cursor.fetchone()[0]
+
+    conn.close()
+    return result

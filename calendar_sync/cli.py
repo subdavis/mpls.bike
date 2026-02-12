@@ -1,4 +1,5 @@
 """CLI for calendar-sync."""
+import os
 
 from datetime import datetime
 from typing import Optional
@@ -8,7 +9,7 @@ from rich.console import Console
 from rich.table import Table
 from dotenv import load_dotenv
 
-from . import calendar, claude, db, report, rss
+from . import calendar, claude, db, prefilter, report, rss
 from .models import Action
 
 
@@ -62,6 +63,42 @@ def process(
         if dry_run:
             console.print("  [yellow](dry run mode)[/yellow]")
 
+        # Pre-filter with Haiku to short-circuit obvious non-events
+        try:
+            pf = prefilter.prefilter_post(post)
+        except Exception as e:
+            console.print(f"  [yellow]Pre-filter error (proceeding to full analysis): {e}[/yellow]")
+            pf = None
+
+        if pf and not pf.is_likely_event:
+            reasoning = "Pre-filter: Haiku classified this post as not an event announcement."
+            console.print(f"  [dim]Pre-filtered as non-event[/dim]")
+            console.print(f"  [cyan]Decision:[/cyan] [dim]ignore[/dim]")
+            console.print(f"  [dim]{reasoning}[/dim]")
+            console.print(f"  [dim]Tokens (prefilter): {pf.input_tokens:,} in / {pf.output_tokens:,} out = ${pf.cost_usd:.4f}[/dim]")
+            if not dry_run:
+                db.record_processed(
+                    post_guid=post.guid,
+                    decision=Action.IGNORE,
+                    reasoning=reasoning,
+                    input_tokens=pf.input_tokens,
+                    output_tokens=pf.output_tokens,
+                    cost_usd=pf.cost_usd,
+                    post_title=post.title,
+                    post_author=post.author,
+                    post_time=post.published.isoformat() if post.published else None,
+                    post_link=post.link,
+                )
+            total_cost += pf.cost_usd
+            continue
+        else:
+            console.print(f"  [dim]Pre-filter result: {'likely event' if pf and pf.is_likely_event else 'unknown (no pre-filter)'}[/dim]")
+
+        # Show prefilter cost if it ran before full analysis
+        prefilter_input_tokens = pf.input_tokens if pf else 0
+        prefilter_output_tokens = pf.output_tokens if pf else 0
+        prefilter_cost = pf.cost_usd if pf else 0.0
+
         try:
             ctx = claude.analyze_post(post, dry_run=dry_run)
         except Exception as e:
@@ -94,9 +131,12 @@ def process(
         if ctx.calendar_event_id:
             console.print(f"  [green]Calendar event:[/green] {ctx.calendar_event_id}")
 
+        combined_cost = ctx.cost_usd + prefilter_cost
         console.print(f"  [dim]Tokens: {ctx.input_tokens:,} in / {ctx.output_tokens:,} out = ${ctx.cost_usd:.4f}[/dim]")
+        if prefilter_cost > 0:
+            console.print(f"  [dim]Pre-filter: {prefilter_input_tokens:,} in / {prefilter_output_tokens:,} out = ${prefilter_cost:.4f}[/dim]")
         console.print(f"  [dim]Log: {ctx.logger.log_path}[/dim]")
-        total_cost += ctx.cost_usd
+        total_cost += combined_cost
 
     console.print(f"\n[bold]Total cost:[/bold] ${total_cost:.4f}")
     console.print(f"[bold]Cumulative cost:[/bold] ${db.get_total_cost():.4f}")

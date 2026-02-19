@@ -173,7 +173,10 @@ For submit_decision, you must provide:
 - action: "create", "update", "cancel", "ignore", or "flag_for_review"
 - reasoning: explanation of your decision
 - event: object with title, date (YYYY-MM-DD), time (HH:MM or null), etc. Required if is_event=true
+  - day_of_week: optional field inside the event object. If you know the day of week for the event date (e.g. the post says "this Saturday"), include it (e.g. "Saturday"). The tool will validate your date calculation and return a helpful error with the correct date if it is wrong.
 - related_event_id: calendar event ID if updating/canceling an existing event
+
+For search_events_by_date, the optional day_of_week parameter works the same way: if you know the day of week for start_date, provide it and the tool will catch any date calculation mistake before you search.
 
 If the action is "flag_for_review", you should provide a detailed explanation of why you're flagging it for review.
 This should be used if you feel something with the workflow is broken (API error, information you've been told to expect is missing, etc.)
@@ -268,6 +271,10 @@ TOOLS = [
                     "type": "string",
                     "description": "End date in YYYY-MM-DD format",
                 },
+                "day_of_week": {
+                    "type": "string",
+                    "description": "Optional: the expected day of week for start_date (e.g. 'Monday', 'Saturday'). If you know the day of week, provide it here and the tool will validate your date calculation, returning an error with a correction if it is wrong.",
+                },
             },
             "required": ["start_date", "end_date"],
         },
@@ -315,6 +322,10 @@ TOOLS = [
                     "properties": {
                         "title": {"type": "string"},
                         "date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+                        "day_of_week": {
+                            "type": "string",
+                            "description": "Optional: the expected day of week for this event's date (e.g. 'Monday', 'Saturday'). If you know the day of week, provide it here and the tool will validate your date calculation, returning an error with a correction if it is wrong.",
+                        },
                         "time": {"type": ["string", "null"]},
                         "end_time": {"type": ["string", "null"]},
                         "timezone": {"type": "string"},
@@ -450,12 +461,64 @@ def execute_get_images(ctx: AnalysisContext) -> list[dict]:
     return content_blocks
 
 
+_DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+
+def validate_day_of_week(date_str: str, day_of_week: str) -> str | None:
+    """Check that date_str falls on the given day of week.
+
+    Returns None if valid, or an error message with nearby suggestions if not.
+    """
+    from datetime import date, timedelta
+
+    normalized = day_of_week.strip().capitalize()
+    # Accept abbreviations like "Mon", "Tue", etc.
+    if normalized not in _DAY_NAMES:
+        for day in _DAY_NAMES:
+            if day.lower().startswith(normalized.lower()):
+                normalized = day
+                break
+        else:
+            return f"Unknown day of week: '{day_of_week}'. Use a name like 'Monday', 'Tuesday', etc."
+
+    try:
+        d = date.fromisoformat(date_str)
+    except ValueError:
+        return f"Invalid date format: '{date_str}'. Expected YYYY-MM-DD."
+
+    actual_day = _DAY_NAMES[d.weekday()]
+    if actual_day == normalized:
+        return None  # Valid
+
+    # Build "did you mean" suggestions: nearest past and next matching dates
+    expected_idx = _DAY_NAMES.index(normalized)
+    actual_idx = d.weekday()
+    days_forward = (expected_idx - actual_idx) % 7
+    days_backward = (actual_idx - expected_idx) % 7
+
+    def fmt(dt: "date") -> str:
+        return dt.strftime("%b") + " " + str(dt.day)
+
+    prev_date = d - timedelta(days=days_backward)
+    next_date = d + timedelta(days=days_forward)
+    actual_date_str = fmt(d)
+
+    return (
+        f"{actual_date_str} is a {actual_day}, not a {normalized}. "
+        f"Did you mean {fmt(prev_date)} ({normalized}) or {fmt(next_date)} ({normalized})?"
+    )
+
+
 def execute_tool(name: str, input_data: dict, ctx: AnalysisContext) -> Any:
     """Execute a tool and return the result."""
     if name == "get_images":
         return execute_get_images(ctx)
 
     elif name == "search_events_by_date":
+        if day_of_week := input_data.get("day_of_week"):
+            error = validate_day_of_week(input_data["start_date"], day_of_week)
+            if error:
+                return {"error": error}
         events = calendar.search_events_by_date(
             start_date=input_data["start_date"],
             end_date=input_data["end_date"],
@@ -485,7 +548,12 @@ def handle_submit_decision(input_data: dict, ctx: AnalysisContext) -> dict:
         # Validate event details if present
         event = None
         if input_data.get("event"):
-            event_data = input_data["event"]
+            event_data = dict(input_data["event"])
+            # Validate day_of_week before creating the event
+            if day_of_week := event_data.pop("day_of_week", None):
+                dow_error = validate_day_of_week(event_data["date"], day_of_week)
+                if dow_error:
+                    return {"error": dow_error}
             # Apply defaults
             if "timezone" not in event_data:
                 event_data["timezone"] = "America/Chicago"

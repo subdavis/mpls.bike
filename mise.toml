@@ -18,3 +18,12 @@ run = "uv run calsync"
 
 [tasks.trigger]
 run = "gh workflow run sync.yml"
+
+[tasks."validate:ty"]
+run = "uv run ty check"
+
+[tasks."validate:ruff"]
+run = "uv run ruff format"
+
+[tasks.validate]
+depends = ["validate:*"]

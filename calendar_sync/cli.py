@@ -1,4 +1,5 @@
 """CLI for calendar-sync."""
+
 import os
 
 from datetime import datetime
@@ -30,8 +31,12 @@ DEFAULT_FEED = "https://rssglue.subdavis.com/feed/cycling-merge/rss"
 @app.command()
 def process(
     feed: str = typer.Option(DEFAULT_FEED, "--feed", "-f", help="RSS feed URL"),
-    dry_run: bool = typer.Option(False, "--dry-run", "-n", help="Show what would happen without making changes"),
-    limit: Optional[int] = typer.Option(None, "--limit", "-l", help="Maximum posts to process"),
+    dry_run: bool = typer.Option(
+        False, "--dry-run", "-n", help="Show what would happen without making changes"
+    ),
+    limit: Optional[int] = typer.Option(
+        None, "--limit", "-l", help="Maximum posts to process"
+    ),
 ):
     """Process new posts from an RSS feed."""
     db.init_db()
@@ -55,7 +60,9 @@ def process(
     total_cost = 0.0
 
     for i, post in enumerate(unprocessed, 1):
-        console.print(f"\n[bold]Processing {i}/{len(unprocessed)}:[/bold] {post.title[:60]}...")
+        console.print(
+            f"\n[bold]Processing {i}/{len(unprocessed)}:[/bold] {post.title[:60]}..."
+        )
 
         if post.image_urls:
             console.print(f"  [dim]{len(post.image_urls)} image(s)[/dim]")
@@ -67,15 +74,21 @@ def process(
         try:
             pf = prefilter.prefilter_post(post)
         except Exception as e:
-            console.print(f"  [yellow]Pre-filter error (proceeding to full analysis): {e}[/yellow]")
+            console.print(
+                f"  [yellow]Pre-filter error (proceeding to full analysis): {e}[/yellow]"
+            )
             pf = None
 
         if pf and not pf.is_likely_event:
-            reasoning = "Pre-filter: Haiku classified this post as not an event announcement."
+            reasoning = (
+                "Pre-filter: Haiku classified this post as not an event announcement."
+            )
             console.print(f"  [dim]Pre-filtered as non-event[/dim]")
             console.print(f"  [cyan]Decision:[/cyan] [dim]ignore[/dim]")
             console.print(f"  [dim]{reasoning}[/dim]")
-            console.print(f"  [dim]Tokens (prefilter): {pf.input_tokens:,} in / {pf.output_tokens:,} out = ${pf.cost_usd:.4f}[/dim]")
+            console.print(
+                f"  [dim]Tokens (prefilter): {pf.input_tokens:,} in / {pf.output_tokens:,} out = ${pf.cost_usd:.4f}[/dim]"
+            )
             if not dry_run:
                 db.record_processed(
                     post_guid=post.guid,
@@ -92,7 +105,9 @@ def process(
             total_cost += pf.cost_usd
             continue
         else:
-            console.print(f"  [dim]Pre-filter result: {'likely event' if pf and pf.is_likely_event else 'unknown (no pre-filter)'}[/dim]")
+            console.print(
+                f"  [dim]Pre-filter result: {'likely event' if pf and pf.is_likely_event else 'unknown (no pre-filter)'}[/dim]"
+            )
 
         # Show prefilter cost if it ran before full analysis
         prefilter_input_tokens = pf.input_tokens if pf else 0
@@ -119,12 +134,16 @@ def process(
             Action.FLAG: "yellow",
         }.get(decision.action, "")
 
-        console.print(f"  [cyan]Decision:[/cyan] [{style}]{decision.action.value}[/{style}] (confidence: {decision.confidence:.0%})")
+        console.print(
+            f"  [cyan]Decision:[/cyan] [{style}]{decision.action.value}[/{style}] (confidence: {decision.confidence:.0%})"
+        )
         console.print(f"  [dim]{decision.reasoning}[/dim]")
 
         if decision.is_event and decision.event:
             console.print(f"  [blue]Event:[/blue] {decision.event.title}")
-            console.print(f"  [blue]Date:[/blue] {decision.event.date} {decision.event.time or 'all day'}")
+            console.print(
+                f"  [blue]Date:[/blue] {decision.event.date} {decision.event.time or 'all day'}"
+            )
             if decision.event.location:
                 console.print(f"  [blue]Location:[/blue] {decision.event.location}")
 
@@ -132,9 +151,13 @@ def process(
             console.print(f"  [green]Calendar event:[/green] {ctx.calendar_event_id}")
 
         combined_cost = ctx.cost_usd + prefilter_cost
-        console.print(f"  [dim]Tokens: {ctx.input_tokens:,} in / {ctx.output_tokens:,} out = ${ctx.cost_usd:.4f}[/dim]")
+        console.print(
+            f"  [dim]Tokens: {ctx.input_tokens:,} in / {ctx.output_tokens:,} out = ${ctx.cost_usd:.4f}[/dim]"
+        )
         if prefilter_cost > 0:
-            console.print(f"  [dim]Pre-filter: {prefilter_input_tokens:,} in / {prefilter_output_tokens:,} out = ${prefilter_cost:.4f}[/dim]")
+            console.print(
+                f"  [dim]Pre-filter: {prefilter_input_tokens:,} in / {prefilter_output_tokens:,} out = ${prefilter_cost:.4f}[/dim]"
+            )
         console.print(f"  [dim]Log: {ctx.logger.log_path}[/dim]")
         total_cost += combined_cost
 
@@ -195,28 +218,48 @@ def details(
     """Show full details for a processed post."""
     db.init_db()
 
-    record = db.get_processed(guid)
-    if not record:
+    records = db.get_processed(guid)
+    if not records:
         console.print(f"[yellow]No record found for:[/yellow] {guid}")
         raise typer.Exit(1)
 
-    console.print(f"[bold]GUID:[/bold]       {record['post_guid']}")
-    console.print(f"[bold]Title:[/bold]      {record.get('post_title') or '-'}")
-    console.print(f"[bold]Author:[/bold]     {record.get('post_author') or '-'}")
-    console.print(f"[bold]Post Time:[/bold]  {format_local_time(record.get('post_time'))}")
-    console.print(f"[bold]Processed:[/bold]  {format_local_time(record['processed_at'])}")
-    console.print(f"[bold]Decision:[/bold]   {record['decision']}")
-    console.print(f"[bold]Event ID:[/bold]   {record['calendar_event_id'] or '-'}")
-    console.print(f"[bold]Tokens:[/bold]     {record.get('input_tokens', 0) or 0:,} in / {record.get('output_tokens', 0) or 0:,} out")
-    console.print(f"[bold]Cost:[/bold]       ${record.get('cost_usd', 0) or 0:.4f}")
-    console.print()
-    console.print("[bold]Reasoning:[/bold]")
-    console.print(record.get("reasoning") or "-")
+    first = records[0]
+    console.print(f"[bold]GUID:[/bold]       {first['post_guid']}")
+    console.print(f"[bold]Title:[/bold]      {first.get('post_title') or '-'}")
+    console.print(f"[bold]Author:[/bold]     {first.get('post_author') or '-'}")
+    console.print(
+        f"[bold]Post Time:[/bold]  {format_local_time(first.get('post_time'))}"
+    )
+
+    for i, record in enumerate(records):
+        if len(records) > 1:
+            console.print(f"\n[bold]--- Decision {i + 1} of {len(records)} ---[/bold]")
+        console.print(
+            f"[bold]Processed:[/bold]  {format_local_time(record['processed_at'])}"
+        )
+        console.print(f"[bold]Decision:[/bold]   {record['decision']}")
+        console.print(f"[bold]Event ID:[/bold]   {record['calendar_event_id'] or '-'}")
+        if record.get("event_title"):
+            console.print(f"[bold]Event:[/bold]      {record['event_title']}")
+            console.print(f"[bold]Date:[/bold]       {record.get('event_date') or '-'}")
+            console.print(f"[bold]Time:[/bold]       {record.get('event_time') or '-'}")
+            console.print(
+                f"[bold]Location:[/bold]   {record.get('event_location') or '-'}"
+            )
+        console.print(
+            f"[bold]Tokens:[/bold]     {record.get('input_tokens', 0) or 0:,} in / {record.get('output_tokens', 0) or 0:,} out"
+        )
+        console.print(f"[bold]Cost:[/bold]       ${record.get('cost_usd', 0) or 0:.4f}")
+        console.print()
+        console.print("[bold]Reasoning:[/bold]")
+        console.print(record.get("reasoning") or "-")
 
 
 @app.command()
 def reset(
-    guid: Optional[str] = typer.Argument(None, help="Post GUID to reset (omit to clear all history)"),
+    guid: Optional[str] = typer.Argument(
+        None, help="Post GUID to reset (omit to clear all history)"
+    ),
 ):
     """Reset processing history. Pass a GUID to re-process a single item, or omit to clear all."""
     db.init_db()
@@ -231,6 +274,7 @@ def reset(
             return
 
         import sqlite3
+
         conn = sqlite3.connect(db.get_db_path())
         conn.execute("DELETE FROM processed_posts")
         conn.commit()
@@ -241,7 +285,9 @@ def reset(
 
 @app.command("report")
 def report_cmd(
-    output: str = typer.Option("report.html", "--output", "-o", help="Output HTML file path"),
+    output: str = typer.Option(
+        "report.html", "--output", "-o", help="Output HTML file path"
+    ),
     limit: int = typer.Option(50, "--limit", "-l", help="Number of entries to include"),
 ):
     """Generate a static HTML report of processing history."""
@@ -257,7 +303,9 @@ def report_cmd(
     with open(output, "w") as f:
         f.write(report_html)
 
-    console.print(f"[green]Report written to:[/green] {output} ({len(entries)} entries)")
+    console.print(
+        f"[green]Report written to:[/green] {output} ({len(entries)} entries)"
+    )
 
 
 @app.command()
@@ -309,7 +357,9 @@ def validate():
 
     try:
         event_id = calendar.create_event(test_event)
-        console.print(f"[green]Write test:[/green] Created test event {event_id[:20]}...")
+        console.print(
+            f"[green]Write test:[/green] Created test event {event_id[:20]}..."
+        )
 
         # Delete it immediately
         calendar.delete_event(event_id)

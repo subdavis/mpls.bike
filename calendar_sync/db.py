@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
-from .models import Action
+from .models import Action, EventDetails
 
 
 def get_db_path() -> Path:
@@ -23,7 +23,8 @@ def init_db() -> None:
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS processed_posts (
-            post_guid TEXT PRIMARY KEY,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            post_guid TEXT NOT NULL,
             processed_at TEXT NOT NULL,
             decision TEXT NOT NULL,
             calendar_event_id TEXT,
@@ -34,16 +35,13 @@ def init_db() -> None:
             post_title TEXT,
             post_author TEXT,
             post_time TEXT,
-            post_link TEXT
+            post_link TEXT,
+            event_title TEXT,
+            event_date TEXT,
+            event_time TEXT,
+            event_location TEXT
         )
     """)
-
-    # Migrate existing DBs: add new columns if missing
-    cursor.execute("PRAGMA table_info(processed_posts)")
-    existing_columns = {row[1] for row in cursor.fetchall()}
-    for col in ["post_title", "post_author", "post_time", "post_link"]:
-        if col not in existing_columns:
-            cursor.execute(f"ALTER TABLE processed_posts ADD COLUMN {col} TEXT")
 
     conn.commit()
     conn.close()
@@ -64,20 +62,20 @@ def is_processed(post_guid: str) -> bool:
     return result
 
 
-def get_processed(post_guid: str) -> dict | None:
-    """Get the processing record for a post."""
+def get_processed(post_guid: str) -> list[dict]:
+    """Get all processing records for a post."""
     conn = sqlite3.connect(get_db_path())
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
     cursor.execute(
-        "SELECT * FROM processed_posts WHERE post_guid = ?",
+        "SELECT * FROM processed_posts WHERE post_guid = ? ORDER BY id",
         (post_guid,),
     )
-    row = cursor.fetchone()
+    rows = cursor.fetchall()
 
     conn.close()
-    return dict(row) if row else None
+    return [dict(row) for row in rows]
 
 
 def record_processed(
@@ -92,6 +90,7 @@ def record_processed(
     post_author: Optional[str] = None,
     post_time: Optional[str] = None,
     post_link: Optional[str] = None,
+    event: Optional[EventDetails] = None,
 ) -> None:
     """Record that a post has been processed."""
     conn = sqlite3.connect(get_db_path())
@@ -99,9 +98,11 @@ def record_processed(
 
     cursor.execute(
         """
-        INSERT OR REPLACE INTO processed_posts
-        (post_guid, processed_at, decision, calendar_event_id, reasoning, input_tokens, output_tokens, cost_usd, post_title, post_author, post_time, post_link)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO processed_posts
+        (post_guid, processed_at, decision, calendar_event_id, reasoning,
+         input_tokens, output_tokens, cost_usd, post_title, post_author,
+         post_time, post_link, event_title, event_date, event_time, event_location)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             post_guid,
@@ -116,6 +117,10 @@ def record_processed(
             post_author,
             post_time,
             post_link,
+            event.title if event else None,
+            event.date if event else None,
+            event.time if event else None,
+            event.location if event else None,
         ),
     )
 

@@ -19,6 +19,7 @@ INPUT_COST_PER_M = 3.00
 OUTPUT_COST_PER_M = 15.00
 TIME_ZONE = "America/Chicago"
 
+
 def local_time_str(dt: datetime | str | None) -> str:
     """Convert UTC datetime or ISO string to local timezone string for logging.
 
@@ -42,7 +43,8 @@ def local_time_str(dt: datetime | str | None) -> str:
     # Convert to local timezone
     tz = ZoneInfo(TIME_ZONE)
     local_dt = dt.astimezone(tz)
-    return local_dt.strftime('%Y-%m-%d %H:%M:%S %Z')
+    return local_dt.strftime("%Y-%m-%d %H:%M:%S %Z")
+
 
 def get_logs_dir() -> Path:
     """Get the logs directory path."""
@@ -85,7 +87,9 @@ class SessionLogger:
         with open(self.log_path, "a") as f:
             f.write(f"=== TURN {self.turn} ===\n")
             f.write(f"Stop reason: {response.stop_reason}\n")
-            f.write(f"Tokens: {response.usage.input_tokens} in / {response.usage.output_tokens} out\n\n")
+            f.write(
+                f"Tokens: {response.usage.input_tokens} in / {response.usage.output_tokens} out\n\n"
+            )
 
             # Log assistant response
             f.write("--- Assistant ---\n")
@@ -127,7 +131,9 @@ class SessionLogger:
             f.write(f"Total tokens: {ctx.input_tokens} in / {ctx.output_tokens} out\n")
             f.write(f"Cost: ${ctx.cost_usd:.4f}\n")
             f.write(f"Decisions: {len(ctx.decisions)}\n")
-            for i, (decision, cal_id) in enumerate(zip(ctx.decisions, ctx.calendar_event_ids)):
+            for i, (decision, cal_id) in enumerate(
+                zip(ctx.decisions, ctx.calendar_event_ids)
+            ):
                 if len(ctx.decisions) > 1:
                     f.write(f"\n--- Decision {i + 1} ---\n")
                 f.write(f"Decision: {decision.action.value}\n")
@@ -141,6 +147,7 @@ class SessionLogger:
         """Log an error."""
         with open(self.log_path, "a") as f:
             f.write(f"\n!!! ERROR !!!\n{error}\n")
+
 
 SYSTEM_PROMPT = f"""You are analyzing RSS posts to determine if they announce events that should be added to a calendar.
 
@@ -289,7 +296,7 @@ TOOLS = [
                     "type": "array",
                     "items": {"type": "string"},
                     "minItems": 1,
-                    "description": "List of search terms to match against (e.g., [\"Unity Ride\", \"Unity\", \"Sunday ride\"]). An event matching ANY keyword will be returned.",
+                    "description": 'List of search terms to match against (e.g., ["Unity Ride", "Unity", "Sunday ride"]). An event matching ANY keyword will be returned.',
                 },
             },
             "required": ["keywords"],
@@ -347,7 +354,7 @@ TOOLS = [
             },
             "required": ["is_event", "confidence", "action", "reasoning", "done"],
         },
-    }
+    },
 ]
 
 
@@ -388,13 +395,13 @@ class AnalysisContext:
 
 def _detect_media_type(data: bytes) -> str | None:
     """Detect image media type from magic bytes."""
-    if data[:8] == b'\x89PNG\r\n\x1a\n':
+    if data[:8] == b"\x89PNG\r\n\x1a\n":
         return "image/png"
-    if data[:3] == b'\xff\xd8\xff':
+    if data[:3] == b"\xff\xd8\xff":
         return "image/jpeg"
-    if data[:4] == b'RIFF' and data[8:12] == b'WEBP':
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":
         return "image/webp"
-    if data[:6] in (b'GIF87a', b'GIF89a'):
+    if data[:6] in (b"GIF87a", b"GIF89a"):
         return "image/gif"
     return None
 
@@ -420,14 +427,18 @@ def fetch_image_as_base64(url: str) -> tuple[str, str] | None:
 def build_message_content(post: RssPost) -> list[dict]:
     """Build the message content with text only (images loaded on demand via get_images tool)."""
     image_count = min(len(post.image_urls), 5)
-    image_note = f"\n\nThis post has {image_count} image(s) available. Call get_images to view them." if image_count > 0 else "\n\nThis post has no images."
+    image_note = (
+        f"\n\nThis post has {image_count} image(s) available. Call get_images to view them."
+        if image_count > 0
+        else "\n\nThis post has no images."
+    )
 
     text = f"""Analyze this RSS post:
 
 Title: {post.title}
-Author: {post.author or 'Unknown'}
+Author: {post.author or "Unknown"}
 Link: {post.link}
-Published: {local_time_str(post.published) if post.published else 'Unknown'}
+Published: {local_time_str(post.published) if post.published else "Unknown"}
 
 Content:
 {post.content}{image_note}
@@ -445,25 +456,37 @@ def execute_get_images(ctx: AnalysisContext) -> list[dict]:
         image_data = fetch_image_as_base64(url)
         if image_data:
             media_type, b64 = image_data
-            content_blocks.append({
-                "type": "image",
-                "source": {
-                    "type": "base64",
-                    "media_type": media_type,
-                    "data": b64,
-                },
-            })
+            content_blocks.append(
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": media_type,
+                        "data": b64,
+                    },
+                }
+            )
             fetched += 1
 
     if not content_blocks:
         content_blocks.append({"type": "text", "text": "No images could be loaded."})
     else:
-        content_blocks.insert(0, {"type": "text", "text": f"Loaded {fetched} image(s)."})
+        content_blocks.insert(
+            0, {"type": "text", "text": f"Loaded {fetched} image(s)."}
+        )
 
     return content_blocks
 
 
-_DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+_DAY_NAMES = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+]
 
 
 def validate_day_of_week(date_str: str, day_of_week: str) -> str | None:
@@ -526,14 +549,26 @@ def execute_tool(name: str, input_data: dict, ctx: AnalysisContext) -> Any:
             end_date=input_data["end_date"],
         )
         return [
-            {"id": e.id, "title": e.title, "start": e.start.isoformat(), "location": e.location, "description": e.description}
+            {
+                "id": e.id,
+                "title": e.title,
+                "start": e.start.isoformat(),
+                "location": e.location,
+                "description": e.description,
+            }
             for e in events
         ]
 
     elif name == "search_events_by_keyword":
         events = calendar.search_events_by_keyword(keywords=input_data["keywords"])
         return [
-            {"id": e.id, "title": e.title, "start": e.start.isoformat(), "location": e.location, "description": e.description}
+            {
+                "id": e.id,
+                "title": e.title,
+                "start": e.start.isoformat(),
+                "location": e.location,
+                "description": e.description,
+            }
             for e in events
         ]
 
@@ -556,9 +591,6 @@ def handle_submit_decision(input_data: dict, ctx: AnalysisContext) -> dict:
                 dow_error = validate_day_of_week(event_data["date"], day_of_week)
                 if dow_error:
                     return {"error": dow_error}
-            # Apply defaults
-            if "timezone" not in event_data:
-                event_data["timezone"] = "America/Chicago"
             event = EventDetails(**event_data)
 
         # Validate the full decision
@@ -577,8 +609,14 @@ def handle_submit_decision(input_data: dict, ctx: AnalysisContext) -> dict:
         if not ctx.dry_run:
             if decision.action == Action.CREATE and decision.event:
                 calendar_event_id = calendar.create_event(decision.event)
-            elif decision.action == Action.UPDATE and decision.event and decision.related_event_id:
-                calendar_event_id = calendar.update_event(decision.related_event_id, decision.event)
+            elif (
+                decision.action == Action.UPDATE
+                and decision.event
+                and decision.related_event_id
+            ):
+                calendar_event_id = calendar.update_event(
+                    decision.related_event_id, decision.event
+                )
             elif decision.action == Action.CANCEL and decision.related_event_id:
                 calendar.delete_event(decision.related_event_id)
                 calendar_event_id = decision.related_event_id
@@ -596,9 +634,8 @@ def handle_submit_decision(input_data: dict, ctx: AnalysisContext) -> dict:
             post_author=ctx.post.author,
             post_time=ctx.post.published.isoformat() if ctx.post.published else None,
             post_link=ctx.post.link,
+            event=decision.event,
         )
-
-
 
         ctx.decisions.append(decision)
         ctx.calendar_event_ids.append(calendar_event_id)
@@ -638,8 +675,8 @@ def analyze_post(post: RssPost, dry_run: bool = False) -> AnalysisContext:
             model="claude-sonnet-4-5",
             max_tokens=4096,
             system=SYSTEM_PROMPT,
-            tools=TOOLS,
-            messages=messages,
+            tools=TOOLS,  # ty: ignore[invalid-argument-type]
+            messages=messages,  # ty: ignore[invalid-argument-type]
         )
 
         # Track tokens
@@ -660,13 +697,19 @@ def analyze_post(post: RssPost, dry_run: bool = False) -> AnalysisContext:
                         content = result
                     else:
                         content = json.dumps(result)
-                    tool_results.append({
-                        "type": "tool_result",
-                        "tool_use_id": block.id,
-                        "content": content,
-                    })
+                    tool_results.append(
+                        {
+                            "type": "tool_result",
+                            "tool_use_id": block.id,
+                            "content": content,
+                        }
+                    )
 
-                    if block.name == "submit_decision" and isinstance(result, dict) and result.get("done"):
+                    if (
+                        block.name == "submit_decision"
+                        and isinstance(result, dict)
+                        and result.get("done")
+                    ):
                         done = True
 
             ctx.logger.log_turn(response, tool_results)

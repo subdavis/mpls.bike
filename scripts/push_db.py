@@ -22,7 +22,7 @@ def main():
 
     try:
         print(f"Uploading {local_path} to s3://{BUCKET_NAME}/{DB_KEY}...")
-        with open(local_path, 'rb') as f:
+        with open(local_path, "rb") as f:
             s3.put_object(Bucket=BUCKET_NAME, Key=DB_KEY, Body=f)
         print(f"✓ Successfully uploaded database to s3://{BUCKET_NAME}/{DB_KEY}")
     except ClientError as e:

@@ -15,6 +15,25 @@ class Action(str, Enum):
     FLAG = "flag_for_review"
 
 
+class Tag(str, Enum):
+    GROUP_RIDE_NO_DROP = "group_ride_no_drop"
+    GROUP_RIDE_DROP = "group_ride_drop"
+    SELF_SUPPORTED_RIDE = "self_supported_ride"
+    ORGANIZED_RIDE = "organized_ride"
+    RACE_ALLEYCAT = "race_alleycat"
+    RACE_CX = "race_cx"
+    RACE_GRAVEL = "race_gravel"
+    RACE_MTB = "race_mtb"
+    RACE_OTHER = "race_other"
+    BIKE_POLO = "bike_polo"
+    CLASS_SEMINAR = "class_seminar"
+    GATHERING = "gathering"
+    SKILLS_CLINIC = "skills_clinic"
+    CAMPING = "camping"
+    MAINTENANCE = "maintenance"
+    SALE_SWAP_MEET = "sale_swap_meet"
+
+
 class EventDetails(BaseModel):
     """Extracted event information."""
 

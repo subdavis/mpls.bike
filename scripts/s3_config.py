@@ -40,12 +40,12 @@ def get_s3_client():
         sys.exit(1)
 
     # GCS S3 interoperability requires signature version 's3' (v2)
-    config = Config(signature_version='s3')
+    config = Config(signature_version="s3")
 
     return boto3.client(
-        's3',
+        "s3",
         aws_access_key_id=access_key,
         aws_secret_access_key=secret_key,
         endpoint_url=endpoint_url,
-        config=config
+        config=config,
     )

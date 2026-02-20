@@ -1,9 +1,11 @@
 """Pre-filter posts using Haiku to quickly identify non-events before full analysis."""
+
 from time import timezone
 from datetime import datetime
 from calendar_sync.claude import local_time_str, TIME_ZONE
 
 from anthropic import Anthropic
+from anthropic.types import TextBlock
 
 from .models import RssPost
 
@@ -55,9 +57,9 @@ def prefilter_post(post: RssPost) -> PrefilterResult:
     user_text = f"""Analyze this RSS post:
 
 Title: {post.title}
-Author: {post.author or 'Unknown'}
+Author: {post.author or "Unknown"}
 Link: {post.link}
-Published: {local_time_str(post.published) if post.published else 'Unknown'}
+Published: {local_time_str(post.published) if post.published else "Unknown"}
 
 Content:
 {post.content}
@@ -70,11 +72,17 @@ Content:
         messages=[{"role": "user", "content": user_text}],
     )
 
-    answer = response.content[0].text.splitlines()[0].strip().upper()  # Get the first line of the response
+    first_block = response.content[0]
+    assert isinstance(first_block, TextBlock)
+    answer = (
+        first_block.text.splitlines()[0].strip().upper()
+    )  # Get the first line of the response
     is_likely_event = answer != "NO"
-   
-    if len(response.content[0].text) > 3:
-        print(f"Warning: Haiku pre-filter response had more than one message. Using only the first message's text. Full response: {response.content}")
+
+    if len(first_block.text) > 3:
+        print(
+            f"Warning: Haiku pre-filter response had more than one message. Using only the first message's text. Full response: {response.content}"
+        )
 
     return PrefilterResult(
         is_likely_event=is_likely_event,

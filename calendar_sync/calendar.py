@@ -143,9 +143,7 @@ def create_event(
     # Build event body
     body = _build_event_body(event)
 
-    result = (
-        service.events().insert(calendarId=calendar_id, body=body).execute()
-    )
+    result = service.events().insert(calendarId=calendar_id, body=body).execute()
     return result["id"]
 
 

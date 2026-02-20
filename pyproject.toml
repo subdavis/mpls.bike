@@ -22,4 +22,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [dependency-groups]
-dev = ["boto3>=1.35"]
+dev = [
+    "boto3>=1.35",
+    "ruff>=0.15.2",
+    "ty>=0.0.17",
+]

@@ -24,3 +24,9 @@ mise run trigger
 gh run list
 gh run watch
 ```
+
+## Development
+
+```bash
+mise run validate
+```

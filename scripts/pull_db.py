@@ -23,8 +23,10 @@ def main():
         s3.download_file(BUCKET_NAME, DB_KEY, str(local_path))
         print(f"✓ Successfully downloaded database to {local_path}")
     except ClientError as e:
-        if e.response['Error']['Code'] == '404':
-            print(f"No existing database found at s3://{BUCKET_NAME}/{DB_KEY}, starting fresh")
+        if e.response["Error"]["Code"] == "404":
+            print(
+                f"No existing database found at s3://{BUCKET_NAME}/{DB_KEY}, starting fresh"
+            )
         else:
             print(f"Error downloading database: {e}")
             sys.exit(1)

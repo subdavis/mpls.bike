@@ -24,6 +24,7 @@ def _day_label(post_time: str | None) -> str:
         # Parse and convert to local time
         dt = datetime.fromisoformat(post_time)
         from zoneinfo import ZoneInfo
+
         local_dt = dt.astimezone(ZoneInfo(claude.TIME_ZONE))
         return local_dt.strftime("%A %b ") + str(local_dt.day)
     except (ValueError, TypeError):
@@ -55,13 +56,17 @@ def generate_report(entries: list[dict], total_cost: float) -> str:
             processed = claude.local_time_str(e["processed_at"])
             post_time = claude.local_time_str(e.get("post_time"))
 
-            title_html = f'<a href="{html_lib.escape(link, quote=True)}">{title}</a>' if link else title
+            title_html = (
+                f'<a href="{html_lib.escape(link, quote=True)}">{title}</a>'
+                if link
+                else title
+            )
 
             cards += f"""
     <div class="card">
       <div class="card-header">
         <h2>{title_html}</h2>
-        <span class="badge" style="background:{color}">{html_lib.escape(e['decision'])}</span>
+        <span class="badge" style="background:{color}">{html_lib.escape(e["decision"])}</span>
       </div>
       <div class="card-body">
         <p class="reasoning">{reasoning}</p>

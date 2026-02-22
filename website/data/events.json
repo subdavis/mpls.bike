@@ -1,63 +1,6 @@
 [
   {
     "kind": "calendar#event",
-    "etag": "\"3543461599380894\"",
-    "id": "1vuc0j5f83m0rh2ssptevj2453",
-    "status": "confirmed",
-    "htmlLink": "https://www.google.com/calendar/event?eid=MXZ1YzBqNWY4M20wcmgyc3NwdGV2ajI0NTMgNmEyNTZlMjVlMzE2Y2M2Nzc3MWI5OWJkNDk5ZGZhNTdkMjc4MGQ1MWY2ZWI1ZjlkZjFhOWQ4NDI5OWExYjNjMkBn",
-    "created": "2026-02-18T22:34:05.000Z",
-    "updated": "2026-02-22T03:26:39.690Z",
-    "summary": "Rewrite Your Commute - Active Transportation Open House",
-    "description": "Active Transportation open house by Recovery Bike Shop and the Bryn Mawr Active Transportation Committee. Bridge closures, highway construction, and other infrastructure changes are coming - find out how to adapt and maintain your sanity.<br><br>Time: 1:00-3:00 PM<br><br>Location: Bryn Mawr Presbyterian Church (420 Cedar Lake Rd S, Minneapolis)<br><br>Activities:<br>- Winter riding tips<br>- Conversations with MNDoT about detours<br>- Practice loading your bike on a bus (Metro Transit bus on-site)<br>- Talk with a local bike shop<br>- Refreshments & raffle<br>- Learn about Asphalt Art coming in Spring<br>- Make bike friends and bus friends!<br><br>Link: <a href=\"https://www.instagram.com/p/DVBh7SRjunf/\">https://www.instagram.com/p/DVBh7SRjunf/</a>",
-    "location": "Bryn Mawr Presbyterian Church, 420 Cedar Lake Rd S, Minneapolis, MN",
-    "creator": {
-      "email": "jmbangsund@gmail.com"
-    },
-    "organizer": {
-      "email": "6a256e25e316cc67771b99bd499dfa57d2780d51f6eb5f9df1a9d84299a1b3c2@group.calendar.google.com",
-      "displayName": "Minneapolis Cycling Events",
-      "self": true
-    },
-    "start": {
-      "dateTime": "2026-02-21T13:00:00-06:00",
-      "timeZone": "America/Chicago"
-    },
-    "end": {
-      "dateTime": "2026-02-21T15:00:00-06:00",
-      "timeZone": "America/Chicago"
-    },
-    "iCalUID": "1vuc0j5f83m0rh2ssptevj2453@google.com",
-    "sequence": 0,
-    "reminders": {
-      "useDefault": true
-    },
-    "eventType": "default",
-    "extra_metadata": {
-      "id": 11,
-      "post_guid": "c21aaddde4922ce4",
-      "processed_at": "2026-02-22T03:14:54.921712+00:00",
-      "decision": "ignore",
-      "calendar_event_id": "1vuc0j5f83m0rh2ssptevj2453",
-      "post_content": "<p>Bike + bus is a great combination for getting around town. Studies show it can extend your transit range by 500%. (Fact.) BUT, it can be intense to learn it live. Practice without the rush &amp; learn to load it with ease this Saturday.\n\nFrom 1-3pm, we\u2019ll have a Metro Transit bus *parked* outside the church. Come get comfortable using bus-bike racks without the rush-hour pressure! Try with your own bike, or use ours\u2014we\u2019ll have demo bikes.\n\n\ud83d\udccd outside Bryn Mawr Presbyterian Church (420 Cedar Lake Road South)\n\ud83d\udd70\ufe0f Saturday February 21, 1:00-3:00pm\n\n(And come inside the church for the full Active Transportation open house\u2014see details in our other post. TLDR: Talk to @recoverybikeshop and @metrotransitmn ambassadors, meet new friends and enjoy snacks &amp; a bingo raffle.)</p>\n\n\n\n\n<p><img src=\"https://rssglue.subdavis.com/media/7a/7a5b7d04f4d7e637dcfadc05e3de5ead0704faa1277a57b796c9f9cdd5c7e8d2.jpg\" /></p>\n\n\n<p><small>\u2764\ufe0f 164 likes | \ud83d\udcac 7 comments</small></p>",
-      "reasoning": "This post announces a Bike + Bus Practice Session on Saturday, February 21, 2026, from 1:00-3:00 PM at Bryn Mawr Presbyterian Church. However, this event already exists in the calendar (ID: 1vuc0j5f83m0rh2ssptevj2453) with matching details (date, time, location, and content). This appears to be a duplicate announcement of the same event, so I'm ignoring it to avoid creating a duplicate calendar entry.",
-      "input_tokens": 14660,
-      "output_tokens": 894,
-      "cost_usd": 0.05739,
-      "post_title": "Bike + bus is a great combination for getting around town. Studies show it can extend your transit r",
-      "post_author": "@activetransit.brynmawr",
-      "post_time": "2026-02-16T04:15:45+00:00",
-      "post_link": "https://www.instagram.com/p/DUzb4wEjIp9/",
-      "event_title": "Bike + Bus Practice Session",
-      "event_date": "2026-02-21",
-      "event_time": "13:00",
-      "event_location": "Bryn Mawr Presbyterian Church, 420 Cedar Lake Road South"
-    },
-    "image_urls": [
-      "https://rssglue.subdavis.com/media/7a/7a5b7d04f4d7e637dcfadc05e3de5ead0704faa1277a57b796c9f9cdd5c7e8d2.jpg"
-    ]
-  },
-  {
-    "kind": "calendar#event",
     "etag": "\"3543460413787294\"",
     "id": "3ab6r91clmmsjd45jmgpnq4isk",
     "status": "confirmed",
@@ -115,14 +58,14 @@
   },
   {
     "kind": "calendar#event",
-    "etag": "\"3541345828306334\"",
+    "etag": "\"3543543883843934\"",
     "id": "4cdls965hlvs2gtf3sutfs47p5",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=NGNkbHM5NjVobHZzMmd0ZjNzdXRmczQ3cDUgNmEyNTZlMjVlMzE2Y2M2Nzc3MWI5OWJkNDk5ZGZhNTdkMjc4MGQ1MWY2ZWI1ZjlkZjFhOWQ4NDI5OWExYjNjMkBn",
     "created": "2026-02-09T21:34:50.000Z",
-    "updated": "2026-02-09T21:35:14.153Z",
+    "updated": "2026-02-22T14:52:21.921Z",
     "summary": "FTWNB cyclist meet-up",
-    "description": "<p dir=\"ltr\"><span>Gathering</span><span> and </span><span>Group ride (no-drop)</span> <span><b>FTWNB cyclist meet-up. </b></span><a href=\"https://www.instagram.com/p/DUPftNHDDFQv7sgwOUFKVvrWl8xsslBGNIKKOw0/\"><span><u>Instagram</u></span></a><span>.</span></p><p dir=\"ltr\"><span><b>When: </b></span><span>Sunday </span><span>Feb 22, 2026 10:00\u202fAM</span><span>.</span></p><p dir=\"ltr\"><span><b>Where: </b></span><a href=\"https://www.google.com/maps/place/FRGMNT+Coffee+-+St.+Anthony+Main/data=!4m2!3m1!19sChIJwRP8Hjwts1IRkSYR_DdNdUc\"><span><u>FRGMNT Coffee - St. Anthony Main</u></span></a></p><p dir=\"ltr\"><span><b>Who\u2019s this for</b></span><span>: FTW (anyone but cis-men). See this resource from Grease Rag </span><a href=\"https://greaserag.org/safer-spaces/wtf-is-ftw/\"><span><u>defining FTW.</u></span></a></p><p dir=\"ltr\"><span>Are you NOT a cis-man? Do you ride bikes? Any bike? Show up and meet others who also ride bikes!!!</span></p><br><p dir=\"ltr\"><span>I am looking to create a regularly meeting group to ride bikes in DIFFERENT ways &lt;3 I love exploring dirt as much as I love rush hour pavement. And im tired of doing it alone. maybe you want other endurance riders to train with, maybe you are tired of mountain biking alone, maybe you are new to the city. Maybe you need to vent about being a gender minority in cycling!</span></p><br><p dir=\"ltr\"><span>You DONT need to ride your bike to this. Weather is barrier, just say hi! Will there be a ride? Yes! Do I know where? Not yet!</span></p><br><p dir=\"ltr\"><span>TIP your barista.</span></p><p dir=\"ltr\"><span>NO TRANSPHOBIA, NO RACISM, NO TRUMPISM, NO ASSHOLE BEHAVIOUR TOLERATED. Also an anti-ICE space.</span></p>",
+    "description": "<p><span>Gathering</span><span> and </span><span>Group ride (no-drop)</span> <span><b>FTWNB cyclist meet-up. </b></span><a href=\"https://www.instagram.com/p/DUPftNHDDFQv7sgwOUFKVvrWl8xsslBGNIKKOw0/\" target=\"_blank\"><span><u>Instagram</u></span></a><span>.</span></p><p><span><b>When: </b></span><span>Sunday </span><span>Feb 22, 2026 10:00\u202fAM</span><span>.</span></p><p><span><b>Where: </b></span><a href=\"https://www.google.com/maps/place/FRGMNT+Coffee+-+St.+Anthony+Main/data=!4m2!3m1!19sChIJwRP8Hjwts1IRkSYR_DdNdUc\" target=\"_blank\"><span><u>FRGMNT Coffee - St. Anthony Main</u></span></a></p><p><span><b>Who\u2019s this for</b></span><span>: FTW (anyone but cis-men). See this resource from Grease Rag </span><a href=\"https://greaserag.org/safer-spaces/wtf-is-ftw/\" target=\"_blank\"><span><u>defining FTW.</u></span></a></p><p><span>Are you NOT a cis-man? Do you ride bikes? Any bike? Show up and meet others who also ride bikes!!!</span></p><p><span>I am looking to create a regularly meeting group to ride bikes in DIFFERENT ways &lt;3 I love exploring dirt as much as I love rush hour pavement. And im tired of doing it alone. maybe you want other endurance riders to train with, maybe you are tired of mountain biking alone, maybe you are new to the city. Maybe you need to vent about being a gender minority in cycling!</span></p><p><span>You DONT need to ride your bike to this. Weather is barrier, just say hi! Will there be a ride? Yes! Do I know where? Not yet!</span></p><p><span>TIP your barista.</span></p><p><span>NO TRANSPHOBIA, NO RACISM, NO TRUMPISM, NO ASSHOLE BEHAVIOUR TOLERATED. Also an anti-ICE space.</span></p>",
     "location": "FRGMNT Coffee - St. Anthony Main, 43 SE Main St, Minneapolis, MN 55414, USA",
     "creator": {
       "email": "jmbangsund@gmail.com"

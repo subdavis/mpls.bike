@@ -2,20 +2,21 @@
    Design Tokens
    =========================================== */
 :root {
-  --color-bg: #f0e68c;
+  --color-bg: #ffffff;
   --color-text: #1a1a1a;
   --color-link: #0000ee;
   --color-link-visited: #551a8b;
   --color-link-hover: #ff0000;
-  --color-accent: #ff6600;
-  --color-border: #333333;
+  --color-accent: #efefef;
+  --color-border: #c0c0c0;
   --color-card-bg: #ffffff;
-  --color-header-bg: #336699;
-  --color-header-text: #ffffff;
-  --font-body: "Comic Sans MS", "Chalkboard SE", cursive, sans-serif;
+  --color-header-bg: #ffffff;
+  --color-header-text: #000000;
+  --font-body: sans-serif;
   --font-heading: "Arial Black", sans-serif;
-  --border-thick: 3px solid var(--color-border);
-  --max-width: 640px;
+  --border-thick: 1.5px solid var(--color-border);
+  --border-radius: 8px;
+  --max-width: 620px;
   --image-col-width: 160px;
 }
 
@@ -90,10 +91,9 @@ img {
 header[role="banner"] {
   background: var(--color-header-bg);
   color: var(--color-header-text);
-  border-bottom: var(--border-thick);
   text-align: center;
   padding: 1rem;
-  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 header[role="banner"] h1 {
@@ -115,9 +115,9 @@ main {
 
 footer[role="contentinfo"] {
   text-align: center;
-  border-top: var(--border-thick);
   padding: 1rem;
   font-size: 0.85rem;
+  margin-top: 20px;
 }
 
 /* ===========================================
@@ -129,7 +129,7 @@ footer[role="contentinfo"] {
 }
 
 .linktree li {
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .linktree a {
@@ -137,11 +137,12 @@ footer[role="contentinfo"] {
   padding: 1rem;
   background: var(--color-card-bg);
   border: var(--border-thick);
+  border-radius: var(--border-radius);
   text-align: center;
   text-decoration: none;
   font-size: 1.2rem;
   font-weight: bold;
-  color: var(--color-link);
+  color: var(--text-color);
   transition: background 0.1s;
 }
 
@@ -178,12 +179,11 @@ footer[role="contentinfo"] {
 
 .event-card {
   border: var(--border-thick);
+  border-radius: var(--border-radius);
   margin-bottom: 1.5rem;
-  background: var(--color-card-bg);
 }
 
 .event-card__header {
-  background: var(--color-header-bg);
   color: var(--color-header-text);
   padding: 0.5rem 1rem;
 }
@@ -207,22 +207,22 @@ footer[role="contentinfo"] {
 }
 
 .event-card__body {
-  display: grid;
-  grid-template-columns: var(--image-col-width) 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
   padding: 1rem;
 }
 
-.event-card__image {
-  min-height: 80px;
+.event-card__images {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: var(--border-radius);
 }
 
-.event-card__image img {
-  width: 100%;
-  height: auto;
-  display: block;
-  background: #ddd;
-  border: 1px dashed var(--color-border);
+.event-card__image {
+  min-height: 80px;
+  width: 33.3%;
+  min-width: 33.3%;
 }
 
 .event-card__location {
@@ -245,14 +245,5 @@ footer[role="contentinfo"] {
 @media (max-width: 480px) {
   header[role="banner"] h1 {
     font-size: 1.4rem;
-  }
-
-  .event-card__body {
-    grid-template-columns: 1fr;
-  }
-
-  .event-card__image {
-    width: 100%;
-    min-height: 0;
   }
 }

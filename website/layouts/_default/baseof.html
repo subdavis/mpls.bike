@@ -9,13 +9,17 @@
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header role="banner">
-    <h1><a href="{{ "/" | relURL }}">{{ site.Title }}</a></h1>
+    {{ $image := resources.Get "/mpls.bike.jpg" }}
+    <a href="/">
+      <img src="{{ $image.Permalink }}" alt="Minneapolis Cycling Events" width="400px">
+    </a>
   </header>
   <main id="main-content" role="main">
     {{ block "main" . }}{{ end }}
   </main>
   <footer role="contentinfo">
-    <p>&copy; Minneapolis Cycling Events</p>
+    {{ $imageFooter := resources.Get "/bike.jpg" }}
+    <img src="{{ $imageFooter.Permalink }}" alt="Footer of a bicycle" width="200px">
   </footer>
 </body>
 </html>

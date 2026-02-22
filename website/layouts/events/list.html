@@ -1,66 +1,186 @@
 {{ define "main" }}
-<section class="events-list" aria-label="Upcoming cycling events">
+
+{{/* ===== SCHEDULE VIEW ===== */}}
+<section id="schedule-view" class="schedule" aria-label="Upcoming cycling events">
+  <h2 class="schedule__title">Schedule</h2>
   {{ $prevDate := "" }}
   {{ range sort site.Data.events "start.dateTime" "asc" }}
-  {{ $startRaw := or .start.dateTime .start.date }}
-  {{ $curDate := (time.AsTime $startRaw | time.Format "2006-01-02") }}
-  {{ if ne $curDate $prevDate }}
-  <h3 class="date-group-header">{{ time.AsTime $startRaw | time.Format "Monday, January 2" }}</h3>
-  {{ end }}
-  {{ $prevDate = $curDate }}
-  <article class="event-card" aria-label="{{ .summary }}">
-    <header class="event-card__header">
-      <h3>
-        {{ if .htmlLink }}
-          <a href="{{ .htmlLink }}" target="_blank" rel="noopener noreferrer">{{ .summary }}</a>
-        {{ else }}
-          {{ .summary }}
-        {{ end }}
-      </h3>
-      {{ if .start.dateTime }}
-        <time datetime="{{ .start.dateTime }}">
-          {{ time.AsTime .start.dateTime | time.Format "Mon, Jan 2, 2006 at 3:04 PM" }}
-        </time>
-      {{ else if .start.date }}
-        {{ $startDate := time.AsTime .start.date }}
-        {{ $endDate := time.AsTime .end.date }}
-        {{ $endDisplay := $endDate.AddDate 0 0 -1 }}
-        {{ if eq ($startDate.Format "2006-01-02") ($endDisplay.Format "2006-01-02") }}
-          <time datetime="{{ .start.date }}">
-            {{ $startDate | time.Format "Mon, Jan 2, 2006" }} — All Day
-          </time>
-        {{ else }}
-          <time datetime="{{ .start.date }}/{{ .end.date }}">
-            {{ $startDate | time.Format "Mon, Jan 2" }} – {{ $endDisplay | time.Format "Mon, Jan 2, 2006" }}
-          </time>
-        {{ end }}
-      {{ end }}
-    </header>
+    {{ $startRaw := or .start.dateTime .start.date }}
+    {{ $curDate := (time.AsTime $startRaw | time.Format "2006-01-02") }}
 
-    <div class="event-card__body">
-  
-      <div class="event-card__details">
-        {{ with .location }}
-          <p class="event-card__location">
-            <strong>Location:</strong> {{ . }}
-          </p>
-        {{ end }}
-        {{ with .description }}
-          <div class="event-card__description">
-            {{ . | safeHTML }}
-          </div>
+    {{/* Date header for new date groups */}}
+    {{ if ne $curDate $prevDate }}
+      <div class="schedule__date-header" role="heading" aria-level="3">
+        <span class="schedule__date-dot"></span>
+        <span class="schedule__date-label">{{ time.AsTime $startRaw | time.Format "Mon, Jan 2" }}</span>
+      </div>
+    {{ end }}
+    {{ $prevDate = $curDate }}
+
+    {{/* Schedule event row */}}
+    <a href="#event-{{ .id }}" class="schedule__event" data-event-id="{{ .id }}" aria-label="{{ .summary }}">
+      <div class="schedule__event-time">
+        {{ if .start.dateTime }}
+          {{ time.AsTime .start.dateTime | time.Format "3:04 PM" }}
+        {{ else }}
+          All day
         {{ end }}
       </div>
-
-      <div class="event-card__images">
-      {{ range .image_urls }}
-          <div class="event-card__image" aria-hidden="true">
-            <img src="{{ . }}" alt="Event thumbnail" loading="lazy">
-          </div>
-      {{ end }}
+      <div class="schedule__event-card">
+        <div class="schedule__event-color"></div>
+        <div class="schedule__event-info">
+          <span class="schedule__event-title">{{ .summary }}</span>
+          {{ with .location }}
+            <span class="schedule__event-location">{{ . }}</span>
+          {{ end }}
+          {{ with .recurrence_label }}
+            <span class="schedule__event-recurrence">{{ . }}</span>
+          {{ end }}
+        </div>
       </div>
-    </div>
-  </article>
+    </a>
   {{ end }}
 </section>
+
+{{/* ===== EVENT DETAIL VIEWS (hidden by default, shown via JS) ===== */}}
+{{ range site.Data.events }}
+<article id="event-{{ .id }}" class="event-detail" aria-label="{{ .summary }}" hidden>
+  <nav class="event-detail__nav">
+    <a href="#" class="event-detail__back" aria-label="Back to schedule">&larr; Back to schedule</a>
+  </nav>
+
+  {{/* Dark gray hero card */}}
+  <div class="event-detail__hero">
+    <h2 class="event-detail__title">{{ .summary }}</h2>
+  </div>
+
+  <div class="event-detail__meta">
+    {{/* Date and Time */}}
+    <div class="event-detail__row">
+      <span class="event-detail__icon" aria-hidden="true">&#128197;</span>
+      <div>
+        {{ if .start.dateTime }}
+          <time datetime="{{ .start.dateTime }}">
+            {{ time.AsTime .start.dateTime | time.Format "Monday, January 2, 2006" }}
+          </time>
+          <br>
+          <span class="event-detail__time">
+            {{ time.AsTime .start.dateTime | time.Format "3:04 PM" }}
+            {{ with .end.dateTime }} &ndash; {{ time.AsTime . | time.Format "3:04 PM" }}{{ end }}
+          </span>
+        {{ else if .start.date }}
+          {{ $startDate := time.AsTime .start.date }}
+          {{ $endDate := time.AsTime .end.date }}
+          {{ $endDisplay := $endDate.AddDate 0 0 -1 }}
+          {{ if eq ($startDate.Format "2006-01-02") ($endDisplay.Format "2006-01-02") }}
+            <time datetime="{{ .start.date }}">
+              {{ $startDate | time.Format "Monday, January 2, 2006" }} &mdash; All Day
+            </time>
+          {{ else }}
+            <time datetime="{{ .start.date }}/{{ .end.date }}">
+              {{ $startDate | time.Format "Mon, Jan 2" }} &ndash; {{ $endDisplay | time.Format "Mon, Jan 2, 2006" }}
+            </time>
+          {{ end }}
+        {{ end }}
+        {{ with .recurrence_label }}
+          <br><span class="event-detail__recurrence">{{ . }}</span>
+        {{ end }}
+      </div>
+    </div>
+
+    {{/* Location */}}
+    {{ with .location }}
+    <div class="event-detail__row">
+      <span class="event-detail__icon" aria-hidden="true">&#128205;</span>
+      <div>{{ . }}</div>
+    </div>
+    {{ end }}
+
+    {{/* Google Calendar link */}}
+    {{ with .htmlLink }}
+    <div class="event-detail__row">
+      <span class="event-detail__icon" aria-hidden="true">&#128279;</span>
+      <div><a href="{{ . }}" target="_blank" rel="noopener noreferrer">View on Google Calendar<span class="sr-only"> (opens in new tab)</span></a></div>
+    </div>
+    {{ end }}
+  </div>
+
+  {{/* Description */}}
+  {{ with .description }}
+  <div class="event-detail__description">
+    {{ . | safeHTML }}
+  </div>
+  {{ end }}
+
+  {{/* Images — only if they exist */}}
+  {{ with .image_urls }}
+  <div class="event-detail__images">
+    {{ range . }}
+    <div class="event-detail__image">
+      <img src="{{ . }}" alt="Event photo" loading="lazy">
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+</article>
+{{ end }}
+
+<script>
+(function () {
+  var scheduleView = document.getElementById('schedule-view');
+  var allDetails = document.querySelectorAll('.event-detail');
+  var currentDetail = null;
+
+  function showSchedule() {
+    scheduleView.hidden = false;
+    allDetails.forEach(function (d) { d.hidden = true; });
+    currentDetail = null;
+    window.scrollTo(0, 0);
+  }
+
+  function showEvent(id) {
+    var el = document.getElementById('event-' + id);
+    if (!el) return;
+    scheduleView.hidden = true;
+    allDetails.forEach(function (d) { d.hidden = true; });
+    el.hidden = false;
+    currentDetail = el;
+    window.scrollTo(0, 0);
+  }
+
+  function handleHash() {
+    var hash = window.location.hash;
+    if (hash && hash.startsWith('#event-')) {
+      var id = hash.slice(7); // remove '#event-'
+      showEvent(id);
+    } else {
+      showSchedule();
+    }
+  }
+
+  // Event links
+  document.querySelectorAll('.schedule__event').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var id = this.getAttribute('data-event-id');
+      window.location.hash = 'event-' + id;
+    });
+  });
+
+  // Back buttons
+  document.querySelectorAll('.event-detail__back').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      history.pushState(null, '', window.location.pathname);
+      showSchedule();
+    });
+  });
+
+  // Handle hash changes (back/forward)
+  window.addEventListener('hashchange', handleHash);
+
+  // Initial load
+  handleHash();
+})();
+</script>
 {{ end }}

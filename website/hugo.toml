@@ -1,4 +1,4 @@
-baseURL = 'https://bikegroups-org-calendar.pages.dev/'
+baseURL = '/'
 languageCode = 'en-us'
 title = 'Minneapolis Cycling Events'
 

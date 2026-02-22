@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://bikegroups-org-calendar.pages.dev/'
 languageCode = 'en-us'
 title = 'Minneapolis Cycling Events'
 

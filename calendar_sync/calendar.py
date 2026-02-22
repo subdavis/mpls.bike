@@ -130,43 +130,6 @@ def search_events_by_keyword(
     return all_events[:5]
 
 
-def fetch_all_events(
-    start_date: str,
-) -> list[dict]:
-    """Fetch all events from start_date to infinity without expanding recurring events.
-
-    Args:
-        start_date: ISO date string (e.g., "2026-02-14")
-
-    Returns: Raw Google Calendar event dicts (recurring events not expanded)
-    """
-    service = get_calendar_service()
-
-    time_min = f"{start_date}T00:00:00Z"
-
-    all_items: list[dict] = []
-    page_token: str | None = None
-
-    while True:
-        kwargs: dict = dict(
-            calendarId=CALENDAR_ID,
-            timeMin=time_min,
-            singleEvents=False,
-            orderBy="updated",
-        )
-        if page_token:
-            kwargs["pageToken"] = page_token
-
-        result = service.events().list(**kwargs).execute()
-        all_items.extend(result.get("items", []))
-
-        page_token = result.get("nextPageToken")
-        if not page_token:
-            break
-
-    return all_items
-
-
 def create_event(
     event: EventDetails,
 ) -> str:

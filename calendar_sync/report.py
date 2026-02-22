@@ -105,7 +105,7 @@ def _render_card(e: dict) -> str:
         <div class="card-footer">
           <span><strong>Author:</strong> {author}</span>
           <span><strong>GUID:</strong> <code>{guid}</code></span>
-          <span><strong>Event:</strong> {f'<a href="{_gcal_url(raw_event_id)}" target="_blank"><code>{event_id}</code></a>' if raw_event_id else f'<code>{event_id}</code>'}</span>
+          <span><strong>Event:</strong> {f'<a href="{_gcal_url(raw_event_id)}" target="_blank"><code>{event_id}</code></a>' if raw_event_id else f"<code>{event_id}</code>"}</span>
           <span><strong>Post time:</strong> {html_lib.escape(post_time)}</span>
           <span><strong>Processed:</strong> {html_lib.escape(processed)}</span>
           <span><strong>Tokens:</strong> {tokens_in} in / {tokens_out} out</span>

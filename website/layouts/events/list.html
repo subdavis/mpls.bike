@@ -1,0 +1,65 @@
+{{ define "main" }}
+<section class="events-list" aria-label="Upcoming cycling events">
+  {{ $prevDate := "" }}
+  {{ range sort site.Data.events "start.dateTime" "asc" }}
+  {{ $startRaw := or .start.dateTime .start.date }}
+  {{ $curDate := (time.AsTime $startRaw | time.Format "2006-01-02") }}
+  {{ if ne $curDate $prevDate }}
+  <h3 class="date-group-header">{{ time.AsTime $startRaw | time.Format "Monday, January 2" }}</h3>
+  {{ end }}
+  {{ $prevDate = $curDate }}
+  <article class="event-card" aria-label="{{ .summary }}">
+    <header class="event-card__header">
+      <h3>
+        {{ if .htmlLink }}
+          <a href="{{ .htmlLink }}" target="_blank" rel="noopener noreferrer">{{ .summary }}</a>
+        {{ else }}
+          {{ .summary }}
+        {{ end }}
+      </h3>
+      {{ if .start.dateTime }}
+        <time datetime="{{ .start.dateTime }}">
+          {{ time.AsTime .start.dateTime | time.Format "Mon, Jan 2, 2006 at 3:04 PM" }}
+        </time>
+      {{ else if .start.date }}
+        {{ $startDate := time.AsTime .start.date }}
+        {{ $endDate := time.AsTime .end.date }}
+        {{ $endDisplay := $endDate.AddDate 0 0 -1 }}
+        {{ if eq ($startDate.Format "2006-01-02") ($endDisplay.Format "2006-01-02") }}
+          <time datetime="{{ .start.date }}">
+            {{ $startDate | time.Format "Mon, Jan 2, 2006" }} — All Day
+          </time>
+        {{ else }}
+          <time datetime="{{ .start.date }}/{{ .end.date }}">
+            {{ $startDate | time.Format "Mon, Jan 2" }} – {{ $endDisplay | time.Format "Mon, Jan 2, 2006" }}
+          </time>
+        {{ end }}
+      {{ end }}
+    </header>
+
+    <div class="event-card__body">
+      <div class="event-card__image" aria-hidden="true">
+        {{ with .image_urls }}
+          {{ with index . 0 }}
+            <img src="{{ . }}" alt="Event thumbnail" loading="lazy">
+          {{ end }}
+        {{ end }}
+      </div>
+
+      <div class="event-card__details">
+        {{ with .location }}
+          <p class="event-card__location">
+            <strong>Location:</strong> {{ . }}
+          </p>
+        {{ end }}
+        {{ with .description }}
+          <div class="event-card__description">
+            {{ . | safeHTML }}
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </article>
+  {{ end }}
+</section>
+{{ end }}

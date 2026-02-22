@@ -185,7 +185,7 @@ def get_rows_by_calendar_event_ids(event_ids: list[str]) -> dict[str, dict]:
         f"""
         SELECT * FROM processed_posts
         WHERE calendar_event_id IN ({placeholders})
-        ORDER BY id DESC
+        ORDER BY id ASC
         """,
         event_ids,
     )

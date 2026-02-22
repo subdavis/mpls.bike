@@ -12,6 +12,7 @@ dependencies = [
     "pydantic>=2.0",
     "httpx>=0.25",
     "python-dotenv>=1.0",
+    "recurring-ical-events>=3.8.1",
 ]
 
 [project.scripts]
@@ -24,6 +25,8 @@ build-backend = "hatchling.build"
 [dependency-groups]
 dev = [
     "boto3>=1.35",
+    "freezegun>=1.5.5",
+    "pytest>=9.0.2",
     "ruff>=0.15.2",
     "ty>=0.0.17",
 ]

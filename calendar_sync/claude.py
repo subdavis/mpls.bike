@@ -203,10 +203,9 @@ Edge cases:
   - If these are clearly distinct events with all the necessary details, create separate events by calling submit_decision multiple times.
   - DO NOT create more than 5 events from a single post.  If you think more than 5 events are needed, flag_for_review instead.
 
-How to write a good description:
-If you can find these details in the post, they're always worth including.
-
 <Begin description guidance>
+    Description can include basic HTML for formatting (bold, italics, hrefs, line breaks, unordered lists)
+
     Distance: [if the post specified a distance, include it here]
     
     Time: [sometimes the meet time will be a bit before the roll out. If stated, include it here]
@@ -217,36 +216,38 @@ If you can find these details in the post, they're always worth including.
     
     Link: [REQUIRED! Always have at least one link! Choose the most relevant link from the post]
     
-    Leaders: [if the post specifically names leaders, include them here]
+    Leaders: [if the post specifically names leaders, include them here (if you can link to their Instagram or other social profile, even better!)]
 
     [Other details as relevant]
 </End description guidance>
 <Begin Sampole descriptions>
     <Sample description 1>
-    Group ride (no-drop) Bonesaw Cycling Collective Winter Tuesday rides.
-    
-    When: Last Tuesday of each month. Meet at 6:45 PM. Meet at 6:45 pm, roll at 7 pm. 
+        Group ride (no-drop) Bonesaw Cycling Collective Winter Tuesday rides.
+        
+        <b>When</b>: Last Tuesday of each month. Meet at 6:45 PM. Meet at 6:45 pm, roll at 7 pm. 
 
-    Start and Finish: Martin Olav Sabo Bridge
+        <b>Start and Finish</b>: Martin Olav Sabo Bridge
 
-    Distance: typically 10-15 miles. Pace: typically 10-12 mph. 
+        <b>Distance</b>: typically 10-15 miles. <b>Pace</b>: typically 10-12 mph. 
 
-    Our winter ride series starts the last week of November and goes through March! Make sure to dress in layers and bring lights!
+        Our winter ride series starts the last week of November and goes through March! Make sure to dress in layers and bring lights!
 
-    Link: https://bonesawcycling.bike/events
+        <b>Link</b>: <a href="https://bonesawcycling.bike/events">https://bonesawcycling.bike/events</a>
     </Sample description 1>
     <Sample description 2>
-    Group ride (no-drop) Behind Bars Ice Skating Ride. Instagram 
+        Group ride (no-drop) Behind Bars Ice Skating Ride. Instagram 
 
-    When: Saturday Jan 3, 2026 2:00 PM. Roll at 2:15pm.
+        <b>When</b>: Saturday Jan 3, 2026 2:00 PM. Roll at 2:15pm.
 
-    Start: Behind Bars Bicycle Shop Finish: Lake of the Isles ice skating rink
+        <b>Start and Finish</b>: Behind Bars Bicycle Shop Finish: Lake of the Isles ice skating rink
 
-    Distance: ~5 miles. Pace: typically ~12 mph. 
+        <b>Distance</b>: ~5 miles. <b>Pace</b>: typically ~12 mph. 
 
-    Ice skating at Lake of the Isles. If you do not have your own ice skates that is okay! There are some available to borrow from the Lake of the Isles warming hut.
+        Ice skating at Lake of the Isles. If you do not have your own ice skates that is okay! There are some available to borrow from the Lake of the Isles warming hut.
 
-    Link: https://www.instagram.com/p/DT_ZXQLCWeh/
+        <b>Link</b>: <a href="https://www.instagram.com/p/DT_ZXQLCWeh/">https://www.instagram.com/p/DT_ZXQLCWeh/</a>
+        
+        <b>Leaders</b>: <a href="https://www.instagram.com/leader1/">@leader1</a>
     </Sample description 2>
 </End Sample descriptions>
 

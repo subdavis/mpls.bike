@@ -14,8 +14,16 @@ from rich.table import Table
 # Load environment variables from .env file
 load_dotenv()
 
-from . import calendar, claude, db, prefilter, report, rss
-from .models import Action, RssPost
+from . import (  # noqa: E402
+    calendar,
+    claude,
+    db,
+    fetch_events as fetch_events_module,
+    prefilter,
+    report,
+    rss,
+)
+from .models import Action, RssPost  # noqa: E402
 
 
 def format_local_time(iso_str: str | None) -> str:
@@ -86,8 +94,8 @@ def process(
 
         if pf and not pf.is_likely_event:
             reasoning = "Pre-filter: this is not an event announcement."
-            console.print(f"  [dim]Pre-filtered as non-event[/dim]")
-            console.print(f"  [cyan]Decision:[/cyan] [dim]ignore[/dim]")
+            console.print("  [dim]Pre-filtered as non-event[/dim]")
+            console.print("  [cyan]Decision:[/cyan] [dim]ignore[/dim]")
             console.print(f"  [dim]{reasoning}[/dim]")
             console.print(
                 f"  [dim]Tokens (prefilter): {pf.input_tokens:,} in / {pf.output_tokens:,} out = ${pf.cost_usd:.4f}[/dim]"
@@ -399,26 +407,18 @@ def fetch_events(
         help="Output JSON file path",
     ),
 ):
-    """Fetch all calendar events (1 week ago to infinity) and write to a JSON file."""
+    """Fetch calendar events and write to a JSON file.
+
+    Recurring events are expanded for the next 4 months (next occurrence kept,
+    count annotated). One-off events beyond 4 months are included as-is.
+    """
     db.init_db()
 
-    start_date = (datetime.now(timezone.utc) - timedelta(weeks=1)).strftime("%Y-%m-%d")
+    console.print("[bold]Fetching events…[/bold]")
 
-    console.print(f"[bold]Fetching events from:[/bold] {start_date} onward")
-
-    events = calendar.fetch_all_events(start_date=start_date)
+    events = fetch_events_module.build_events_json()
 
     console.print(f"[green]Found {len(events)} events[/green]")
-
-    # Join with local DB rows on calendar event id → extra_metadata
-    event_ids = [e["id"] for e in events if "id" in e]
-    db_rows = db.get_rows_by_calendar_event_ids(event_ids)
-
-    for event in events:
-        event_id = event.get("id")
-        row = db_rows.get(event_id)
-        event["extra_metadata"] = row
-        event["image_urls"] = rss.extract_image_urls(row["post_content"] or "") if row and row.get("post_content") else []
 
     out_path = Path(output)
     out_path.parent.mkdir(parents=True, exist_ok=True)

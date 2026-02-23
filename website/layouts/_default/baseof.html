@@ -19,9 +19,9 @@
   <main id="main-content" role="main" class="max-w-[620px] mx-auto px-4">
     {{ block "main" . }}{{ end }}
   </main>
-  <footer role="contentinfo" class="text-center p-4 text-sm">
-    {{ $imageFooter := resources.Get "/images/bike.png" }}
-    <img src="{{ $imageFooter.Permalink }}" alt="Footer of a bicycle" width="200px" class="mx-auto h-auto contrast-150">
+  <footer role="contentinfo" class="text-center p-8 text-sm">
+    {{ $imageFooter := resources.Get "/images/bike3.png" }}
+    <img src="{{ $imageFooter.Permalink }}" alt="Footer of a bicycle" width="200px" class="mx-auto h-auto contrast-400">
   </footer>
 </body>
 </html>

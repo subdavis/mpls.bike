@@ -18,3 +18,6 @@ __pycache__/
 cal-creds.json
 
 website/public/
+
+node_modules/
+hugo_stats.json

@@ -1,0 +1,13 @@
+links:
+  - name: "Upcoming Events"
+    url: "/events/"
+    image: "/images/calendar.png"
+  - name: "Google Calendar"
+    url: "https://calendar.google.com/calendar/u/0/embed?src=6a256e25e316cc67771b99bd499dfa57d2780d51f6eb5f9df1a9d84299a1b3c2@group.calendar.google.com&ctz=America/Chicago"
+    image: "/images/google.svg"
+  - name: "Local Clubs and Teams"
+    url: "https://bikegroups.org"
+    image: "/images/jersey2.png"
+  - name: "Submit your event"
+    url: "https://docs.google.com/forms/d/e/1FAIpQLScO18rkN9ajjnckLpzGYd1Jb1fAYb2PnLDFmSlO-OXyY-mKNA/viewform"
+    image: "/images/form.png"

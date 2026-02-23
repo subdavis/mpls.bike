@@ -4,22 +4,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ site.Title }}</title>
-  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+  {{ with (templates.Defer (dict "key" "global")) }}
+    {{ partial "css.html" . }}
+  {{ end }}
 </head>
-<body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <header role="banner">
-    {{ $image := resources.Get "/mpls.bike.jpg" }}
-    <a href="/">
-      <img src="{{ $image.Permalink }}" alt="Minneapolis Cycling Events" width="400px">
+<body class="m-0 font-sans bg-white text-gray-900 leading-relaxed">
+  <a class="absolute -top-full left-0 px-4 py-2 bg-white text-black z-50 no-underline font-bold focus:top-0" href="#main-content">Skip to main content</a>
+  <header role="banner" class="bg-white text-black text-center p-4">
+    {{ $image := resources.Get "/images/mpls.bike.jpg" }}
+    <a href="/" class="text-inherit no-underline">
+      <img src="{{ $image.Permalink }}" alt="Minneapolis Cycling Events" width="400px" class="mx-auto h-auto contrast-150">
     </a>
   </header>
-  <main id="main-content" role="main">
+  <main id="main-content" role="main" class="max-w-[620px] mx-auto px-4">
     {{ block "main" . }}{{ end }}
   </main>
-  <footer role="contentinfo">
-    {{ $imageFooter := resources.Get "/bike.jpg" }}
-    <img src="{{ $imageFooter.Permalink }}" alt="Footer of a bicycle" width="200px">
+  <footer role="contentinfo" class="text-center p-4 text-sm">
+    {{ $imageFooter := resources.Get "/images/bike.jpg" }}
+    <img src="{{ $imageFooter.Permalink }}" alt="Footer of a bicycle" width="200px" class="mx-auto h-auto contrast-150">
   </footer>
 </body>
 </html>

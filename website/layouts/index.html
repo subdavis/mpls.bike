@@ -1,32 +1,26 @@
 {{ define "main" }}
-<section class="linktree" aria-label="Quick links">
+<section aria-label="Quick links">
+  <p></p>
   <nav>
-    <ul>
-      <li>
-        <a href="{{ "events/" | relURL }}">
-          Upcoming Events
+    <ul class="list-none p-0">
+      {{ range .Site.Data.links.links }}
+      <li class="mb-4">
+        <a href="{{ .url }}" class="flex items-center p-0 bg-white border-2 border-stone-300 rounded-full no-underlin transition-colors hover:bg-stone-100">
+          {{ if .image }}
+            <div class="bg-stone-700 p-3 rounded-full">
+              {{ $image := resources.Get .image }}
+              <img src="{{ $image.RelPermalink }}" alt="" class="h-10 w-10 invert object-contain rounded-md">
+            </div>
+          {{ end }}
+          <div class="flex-1 text-center mr-10 text-lg font-bold text-stone-700">
+            {{ .name }}
+            {{ if strings.HasPrefix .url "http" }}
+              <span class="sr-only">(opens in new tab)</span>
+            {{ end }}
+          </div>
         </a>
       </li>
-      <li>
-        <a href="https://calendar.google.com/calendar/u/0/embed?src=6a256e25e316cc67771b99bd499dfa57d2780d51f6eb5f9df1a9d84299a1b3c2@group.calendar.google.com&ctz=America/Chicago"
-           target="_blank" rel="noopener noreferrer">
-          Google Calendar
-          <span class="sr-only">(opens in new tab)</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://bikegroups.org" target="_blank" rel="noopener noreferrer">
-          Local Clubs and Teams
-          <span class="sr-only">(opens in new tab)</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScO18rkN9ajjnckLpzGYd1Jb1fAYb2PnLDFmSlO-OXyY-mKNA/viewform"
-           target="_blank" rel="noopener noreferrer">
-          Submit Your Event
-          <span class="sr-only">(opens in new tab)</span>
-        </a>
-      </li>
+      {{ end }}
     </ul>
   </nav>
 </section>

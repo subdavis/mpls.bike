@@ -1,4 +1,4 @@
-baseURL = 'http://100.85.17.47:1313/'
+baseURL = '/'
 languageCode = 'en-us'
 title = 'Minneapolis Cycling Events'
 

@@ -5,7 +5,7 @@
     <ul class="list-none">
       {{ range .Site.Data.links.links }}
       <li class="mb-4 ">
-        <a href="{{ .url }}" class="flex items-center p-0 bg-white border border-stone-300 rounded-lg transition-colors">
+        <a href="{{ .url }}" class="flex items-center p-0 bg-white border border-stone-300 rounded-lg transition-colors" data-umami-event="click-navigation" data-umami-event-title="{{ .name }}">
           {{ if .image }}
             <div class="bg-stone-800 p-3 rounded-md rounded-r-none">
               {{ $image := resources.Get .image }}

@@ -7,6 +7,7 @@
   {{ with (templates.Defer (dict "key" "global")) }}
     {{ partial "css.html" . }}
   {{ end }}
+  <script defer src="https://umami.subdavis.com/script.js" data-website-id="d53bc478-a276-48cf-a3ae-7ac3f68a66da" data-domains="mpls.bike,events.bikegroups.org"></script>
 </head>
 {{ $bg := resources.Get "/images/bg.webp" }}
 <body class="m-0 font-sans text-gray-900 leading-relaxed relative">

@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
-
 # S3/GCS configuration
 BUCKET_NAME = "bikegroups-org"
 DB_KEY = "calendar_sync_db/calendar_sync.db"

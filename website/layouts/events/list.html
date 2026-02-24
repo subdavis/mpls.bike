@@ -16,7 +16,7 @@
     {{ $prevDate = $curDate }}
 
     {{/* Schedule event row */}}
-    <a href="#event-{{ .id }}" class="flex items-stretch gap-3 no-underline text-inherit py-1 visited:text-inherit" data-event-id="{{ .id }}" aria-label="{{ .summary }}">
+    <a href="#event-{{ .id }}" class="flex items-stretch gap-3 no-underline text-inherit py-1 visited:text-inherit" data-event-id="{{ .id }}" aria-label="{{ .summary }}" data-umami-event="click-event" data-umami-event-title="{{ .summary }}">
       <div class="w-15 min-w-15 text-xs font-mono text-stone-700 pt-2 text-right shrink-0">
         {{ if .start.dateTime }}
           {{ time.AsTime .start.dateTime | time.Format "3:04 PM" }}

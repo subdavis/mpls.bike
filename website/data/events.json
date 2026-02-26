@@ -151,6 +151,63 @@
   },
   {
     "kind": "calendar#event",
+    "etag": "\"3544150933872830\"",
+    "id": "q769hs0bjvh8sq1ho00fce3qms",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=cTc2OWhzMGJqdmg4c3ExaG8wMGZjZTNxbXMgNmEyNTZlMjVlMzE2Y2M2Nzc3MWI5OWJkNDk5ZGZhNTdkMjc4MGQ1MWY2ZWI1ZjlkZjFhOWQ4NDI5OWExYjNjMkBn",
+    "created": "2026-02-26T03:11:06.000Z",
+    "updated": "2026-02-26T03:11:06.936Z",
+    "summary": "Team Recess Vinyasa Yoga Class at Yess Yoga",
+    "description": "Vinyasa yoga class organized by Team Recess to support longtime sponsor Yess Yoga.\n\n<b>When</b>: Tuesday, March 3rd from 6-7pm\n\n<b>Location</b>: Yess Yoga\n\n<b>Registration</b>: Required through Yess Yoga website before the class. Drop-in rate is $20/class. New student rates and multi-class packages available.\n\n<b>About Vinyasa</b>: Vinyasa is defined as \"to move in a special way\" - flowing movement sequences that vary each class. Focus on safe alignment and encouraging personal yoga practice exploration.\n\nYoga mats available for use at the studio.\n\n<b>Link</b>: <a href=\"https://www.instagram.com/p/DVMJ5fLjImu/\">https://www.instagram.com/p/DVMJ5fLjImu/</a>",
+    "location": "Yess Yoga",
+    "creator": {
+      "email": "bicyclegroupsorg@bicyclegroupsorg.iam.gserviceaccount.com"
+    },
+    "organizer": {
+      "email": "6a256e25e316cc67771b99bd499dfa57d2780d51f6eb5f9df1a9d84299a1b3c2@group.calendar.google.com",
+      "displayName": "Minneapolis Cycling Events",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2026-03-03T18:00:00-06:00",
+      "timeZone": "America/Chicago"
+    },
+    "end": {
+      "dateTime": "2026-03-03T19:00:00-06:00",
+      "timeZone": "America/Chicago"
+    },
+    "iCalUID": "q769hs0bjvh8sq1ho00fce3qms@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    },
+    "eventType": "default",
+    "extra_metadata": {
+      "id": 41,
+      "post_guid": "cbe9424577a5a8d1",
+      "processed_at": "2026-02-26T03:11:07.237883+00:00",
+      "decision": "create",
+      "calendar_event_id": "q769hs0bjvh8sq1ho00fce3qms",
+      "post_content": "<p>Community support is more important than ever. Please join us in supporting our longtime sponsor, Yess Yoga, by joining us for a Vinyasa yoga class on Tuesday, March 3rd  from 6-7pm. Yess Yoga has the most amazing studio, instructors, and vibe and we can\u2019t wait to introduce you if you\u2019ve never been! Yess Yoga will have yoga mats available for use.\n\nA note on the yoga class: You\u2019ll need to register for the class through Yess Yoga before the ride. Registration happens on their website. Yess\u2019 drop-in rate is $20/class, and they also offer new student rates and multi-class packages. Contact Yess for more information.\n\nAbout Vinyasa- Vinyasa is defined as \u201cto move in a special way\u201d, we try to take that definition to heart each time and bring a group of students together by moving through unique sequences. A vinyasa class can be big flowing movement on each breath or slower movements to explore depth. No class is ever the same as the students in the room are never the same. Our main focus for each class are safe alignment and encouraging each student to explore their personal yoga practice.</p>\n\n\n\n\n<p><img src=\"https://rssglue.subdavis.com/media/2d/2d7cfbe54c2cc2fe2a96d6ef9b47b9e09e832c516fd468aba6d76cd3b7ade163.jpg\" /></p>\n\n\n<p><small>\u2764\ufe0f 8 likes | \ud83d\udcac 0 comments</small></p>",
+      "reasoning": "This post announces a Vinyasa yoga class on Tuesday, March 3rd from 6-7pm at Yess Yoga. The event is organized by Team Recess to support their sponsor Yess Yoga. All key details are provided in both the text and the image (event poster). No duplicates found in the calendar.",
+      "input_tokens": 15212,
+      "output_tokens": 957,
+      "cost_usd": 0.059991,
+      "post_title": "Community support is more important than ever. Please join us in supporting our longtime sponsor, Ye",
+      "post_author": "@team_recess",
+      "post_time": "2026-02-25T17:52:10+00:00",
+      "post_link": "https://www.instagram.com/p/DVMJ5fLjImu/",
+      "event_title": "Team Recess Vinyasa Yoga Class at Yess Yoga",
+      "event_date": "2026-03-03",
+      "event_time": "18:00",
+      "event_location": "Yess Yoga"
+    },
+    "image_urls": [
+      "https://rssglue.subdavis.com/media/2d/2d7cfbe54c2cc2fe2a96d6ef9b47b9e09e832c516fd468aba6d76cd3b7ade163.jpg"
+    ]
+  },
+  {
+    "kind": "calendar#event",
     "etag": "\"3543462178471102\"",
     "id": "6vnhoil9t4i98l4bo7jhf3iu5g",
     "status": "confirmed",

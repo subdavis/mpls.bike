@@ -404,6 +404,49 @@
   },
   {
     "kind": "calendar#event",
+    "etag": "\"3544603476064574\"",
+    "id": "4s5qu58a36ijmqt3ctsjun1hbt_20260303T000000Z",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NHM1cXU1OGEzNmlqbXF0M2N0c2p1bjFoYnRfMjAyNjAzMDNUMDAwMDAwWiA2YTI1NmUyNWUzMTZjYzY3NzcxYjk5YmQ0OTlkZmE1N2QyNzgwZDUxZjZlYjVmOWRmMWE5ZDg0Mjk5YTFiM2MyQGc",
+    "created": "2026-02-28T18:02:17.000Z",
+    "updated": "2026-02-28T18:02:18.032Z",
+    "summary": "Freewheel Minnetonka Monday gravel/MTB rides",
+    "description": "<p dir=\"ltr\"><span>Group ride (no-drop)</span><b> <span>\u00a0</span></b></p><p dir=\"ltr\"><span>Freewheel Minnetonka Monday gravel/MTB rides</span></p><span>When: Roll at 6:30pm, every Monday year round, weather permitting</span><p dir=\"ltr\"><span>Where: </span><a href=\"https://www.google.com/maps/place/Freewheel+Bike+Minnetonka/data=!4m2!3m1!19sChIJPUq7-9s1s1IRkadyN2cJ3qA\"><span><u>Freewheel Bike Minnetonka</u></span></a><span><u>\u00a0</u></span><span>(10750 Cedar Bend, Minnetonka, MN 55305) </span>\u00a0</p><p dir=\"ltr\"><span>Rides are 90 minutes leaving at 6:30 PM with food and beverages provided by the shop after the ride around 8 PM.</span></p><p dir=\"ltr\"><span>Link: </span><a href=\"https://www.strava.com/clubs/470025\"><span><u>https://www.strava.com/clubs/470025</u></span></a> <span>\u00a0</span></p><span>Summer Gravel ride and mountain bike rides</span><p dir=\"ltr\"><span>Distance: 10-15 miles</span></p><p dir=\"ltr\"><span>Pace: 10-15 mph (gravel group is more casual while mountain bike group is faster paced)</span></p><p dir=\"ltr\"><span>What to bring: Gravel bike (any bike you can ride on ill maintained roads is fine) or Mountain bike, helmet, head and tail lights for when the sun sets before 8PM.\u00a0</span></p><p dir=\"ltr\"><span>Both rides are offered most weeks. Gravel ride is chill pace 10-15 miles in 90 minutes, no drop, and almost any bike will do. Mountain bike rides are faster paced and ride 4-5 miles out to Theodore Wirth or Lone Lake park and back.\u00a0</span></p><p dir=\"ltr\"><span>Rides are canceled if weather/trails are not cooperating so check the Freewheel Strava page for updates day of.</span></p><p dir=\"ltr\"><span><span></span></span></p><p dir=\"ltr\"><span>Winter Fat Bike Rides:</span></p><p dir=\"ltr\"><span>Distance: 5-10ish miles on hand built singletrack, bike paths, unplowed railroad service road,\u00a0 frozen lakes, and sometimes the Minnehaha creek</span></p><p dir=\"ltr\"><span>Pace: no drop, depends on group and conditions. 5mph is normal on fatbikes</span></p><p dir=\"ltr\"><span>What to bring: Fat Bike (ideally with studded tires), helmet, head and tail lights,\u00a0 gear for the weather (gloves, buff, hat, boots, etc.).\u00a0</span></p><p dir=\"ltr\"><span>Heavy E-fat bikes not recommended since the bike will need to be lifted over rail road tracks to reach the trails.\u00a0</span></p><span>\u00a0</span><p></p>",
+    "location": "Freewheel Bike Minnetonka, 10750 Cedar Bend, Minnetonka, MN 55305, USA",
+    "creator": {
+      "email": "jmbangsund@gmail.com"
+    },
+    "organizer": {
+      "email": "6a256e25e316cc67771b99bd499dfa57d2780d51f6eb5f9df1a9d84299a1b3c2@group.calendar.google.com",
+      "displayName": "Minneapolis Cycling Events",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2026-03-02T18:00:00-06:00",
+      "timeZone": "America/Chicago"
+    },
+    "end": {
+      "dateTime": "2026-03-02T20:00:00-06:00",
+      "timeZone": "America/Chicago"
+    },
+    "recurringEventId": "4s5qu58a36ijmqt3ctsjun1hbt",
+    "originalStartTime": {
+      "dateTime": "2026-03-02T18:00:00-06:00",
+      "timeZone": "America/Chicago"
+    },
+    "iCalUID": "4s5qu58a36ijmqt3ctsjun1hbt@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    },
+    "eventType": "default",
+    "recurrence_future_count": 18,
+    "recurrence_label": "And 17 more",
+    "extra_metadata": null,
+    "image_urls": []
+  },
+  {
+    "kind": "calendar#event",
     "etag": "\"3517311057671038\"",
     "id": "65ij8dpm6pi6abb3c4s30b9k68r68b9p6sqj4bb365hjic1m71ij8p1hc4_20260305T000000Z",
     "status": "confirmed",
@@ -706,5 +749,76 @@
     "image_urls": [
       "https://rssglue.subdavis.com/media/c0/c00995e15470595f6988b57a23080bf7bfe7b7201a2346810596508ee6999bf6.jpg"
     ]
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3544601429176414\"",
+    "id": "5fpcaltcfg2b18sam5do2rv8pl",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=NWZwY2FsdGNmZzJiMThzYW01ZG8ycnY4cGwgNmEyNTZlMjVlMzE2Y2M2Nzc3MWI5OWJkNDk5ZGZhNTdkMjc4MGQ1MWY2ZWI1ZjlkZjFhOWQ4NDI5OWExYjNjMkBn",
+    "created": "2026-02-28T17:45:14.000Z",
+    "updated": "2026-02-28T17:45:14.588Z",
+    "summary": "TC Bike Polo Summertides II Tournament",
+    "description": "<p dir=\"ltr\"><span>Bike Polo (tournament)</span><span>\u00a0</span></p><p dir=\"ltr\"><span>TC Bike Polo Summertides II Tournament </span><a href=\"https://www.facebook.com/groups/twincitiesbikepolo\"><span><u>Facebook</u></span></a><span>.</span></p><p dir=\"ltr\"><span>All day Saturday and Sunday </span><span>Jul 4, 2026</span><span> - </span><span>Jul 5, 2026</span></p><p dir=\"ltr\"><span>Location: </span><a href=\"https://www.google.com/maps/place/Minneapolis+Bike+Polo+Court/data=!4m2!3m1!19sChIJoQKSCewn9ocRDb6HYYJREas\"><span><u>Minneapolis Bike Polo Court</u></span></a><span> (E 35th St and 3rd Ave S)</span></p><p dir=\"ltr\"><span>This 2 day bike polo tournament will feature 1 day of round robin games, followed by 1 day of bracket elimination games.</span></p>",
+    "location": "Minneapolis Bike Polo Court, 3429 3rd Ave S, Minneapolis, MN 55408, USA",
+    "creator": {
+      "email": "jmbangsund@gmail.com"
+    },
+    "organizer": {
+      "email": "6a256e25e316cc67771b99bd499dfa57d2780d51f6eb5f9df1a9d84299a1b3c2@group.calendar.google.com",
+      "displayName": "Minneapolis Cycling Events",
+      "self": true
+    },
+    "start": {
+      "date": "2026-07-04"
+    },
+    "end": {
+      "date": "2026-07-05"
+    },
+    "transparency": "transparent",
+    "iCalUID": "5fpcaltcfg2b18sam5do2rv8pl@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": false
+    },
+    "eventType": "default",
+    "extra_metadata": null,
+    "image_urls": []
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3544601776475870\"",
+    "id": "3rpqlhloptj87n64oln7j6qnta",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=M3JwcWxobG9wdGo4N242NG9sbjdqNnFudGEgNmEyNTZlMjVlMzE2Y2M2Nzc3MWI5OWJkNDk5ZGZhNTdkMjc4MGQ1MWY2ZWI1ZjlkZjFhOWQ4NDI5OWExYjNjMkBn",
+    "created": "2026-02-28T17:48:07.000Z",
+    "updated": "2026-02-28T17:48:08.237Z",
+    "summary": "TWOHUNDOFUNDO ",
+    "description": "<p dir=\"ltr\"><span>Self-supported ride</span> <span><b>TWOHUNDOFUNDO </b></span><a href=\"https://www.instagram.com/p/DVOrCIBkQRu/\"><span><u>Instagram</u></span></a></p><p dir=\"ltr\"><span>Saturday </span><span>Jul 18, 2026 4:00\u202fAM</span></p><p dir=\"ltr\"><span>Start: </span><a href=\"https://www.google.com/maps/place/Brackett+Park/data=!4m2!3m1!19sChIJBZIBJtUp9ocRf6VSNE8Uok0\"><span><u>Brackett Park</u></span></a><span> End: South Minneapolis</span></p><p dir=\"ltr\"><span>Distance: Up to 200 miles in a loop around the cities. Choose your own adventure, self-supported ride. Bring tools, flat fixing kit, food, water, and whatever else you need to be out biking all day.</span></p><br><p dir=\"ltr\"><span>Description: \u201cA 200 mile ride, starting and ending in South MInneapolis, born from the dream of a mixed terrain, ultra-endurance ride that was accessible to the masses. Sleep in your own bed the night before and the night after, no spending hours on traveling to the event, or spending hundreds of dollars.</span></p><p dir=\"ltr\"><span>The perfect training ride, with numerous pull off points to make the ride as long or as short as you need. Biking through urban areas so you don\u2019t need to worry about being stranded, or having to pay thousands of dollars for a medevac, it\u2019s a quick little Uber ride home.</span></p><p dir=\"ltr\"><span>Start at the beginning and go as long as you can, you will be surprised how far you go! Or meet up with some friends mid-route, and help them keep the party going! A true choose-your-own-adventure, unsanctioned and unsupported, the day is what you make it! Lot of places to rest, and even more places to turn off and shorten the ride, the stakes have never been lower!\u201d</span></p>",
+    "location": "Brackett Park, 2728 S 39th Ave, Minneapolis, MN 55406, USA",
+    "creator": {
+      "email": "jmbangsund@gmail.com"
+    },
+    "organizer": {
+      "email": "6a256e25e316cc67771b99bd499dfa57d2780d51f6eb5f9df1a9d84299a1b3c2@group.calendar.google.com",
+      "displayName": "Minneapolis Cycling Events",
+      "self": true
+    },
+    "start": {
+      "dateTime": "2026-07-18T04:00:00-05:00",
+      "timeZone": "America/Chicago"
+    },
+    "end": {
+      "dateTime": "2026-07-18T20:00:00-05:00",
+      "timeZone": "America/Chicago"
+    },
+    "iCalUID": "3rpqlhloptj87n64oln7j6qnta@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": true
+    },
+    "eventType": "default",
+    "extra_metadata": null,
+    "image_urls": []
   }
 ]

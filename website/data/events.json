@@ -1,15 +1,15 @@
 [
   {
     "kind": "calendar#event",
-    "etag": "\"3544150933872830\"",
+    "etag": "\"3544638066932222\"",
     "id": "q769hs0bjvh8sq1ho00fce3qms",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=cTc2OWhzMGJqdmg4c3ExaG8wMGZjZTNxbXMgNmEyNTZlMjVlMzE2Y2M2Nzc3MWI5OWJkNDk5ZGZhNTdkMjc4MGQ1MWY2ZWI1ZjlkZjFhOWQ4NDI5OWExYjNjMkBn",
     "created": "2026-02-26T03:11:06.000Z",
-    "updated": "2026-02-26T03:11:06.936Z",
+    "updated": "2026-02-28T22:50:33.466Z",
     "summary": "Team Recess Vinyasa Yoga Class at Yess Yoga",
     "description": "Vinyasa yoga class organized by Team Recess to support longtime sponsor Yess Yoga.\n\n<b>When</b>: Tuesday, March 3rd from 6-7pm\n\n<b>Location</b>: Yess Yoga\n\n<b>Registration</b>: Required through Yess Yoga website before the class. Drop-in rate is $20/class. New student rates and multi-class packages available.\n\n<b>About Vinyasa</b>: Vinyasa is defined as \"to move in a special way\" - flowing movement sequences that vary each class. Focus on safe alignment and encouraging personal yoga practice exploration.\n\nYoga mats available for use at the studio.\n\n<b>Link</b>: <a href=\"https://www.instagram.com/p/DVMJ5fLjImu/\">https://www.instagram.com/p/DVMJ5fLjImu/</a>",
-    "location": "Yess Yoga",
+    "location": "Yess Yoga, 105 E 26th St, Minneapolis, MN 55404, USA",
     "creator": {
       "email": "bicyclegroupsorg@bicyclegroupsorg.iam.gserviceaccount.com"
     },
@@ -691,67 +691,6 @@
   },
   {
     "kind": "calendar#event",
-    "etag": "\"3543460630055070\"",
-    "id": "8akl3meb1o7jdvi983ikglerb0",
-    "status": "confirmed",
-    "htmlLink": "https://www.google.com/calendar/event?eid=OGFrbDNtZWIxbzdqZHZpOTgzaWtnbGVyYjAgNmEyNTZlMjVlMzE2Y2M2Nzc3MWI5OWJkNDk5ZGZhNTdkMjc4MGQ1MWY2ZWI1ZjlkZjFhOWQ4NDI5OWExYjNjMkBn",
-    "created": "2026-02-22T03:17:22.000Z",
-    "updated": "2026-02-22T03:18:35.027Z",
-    "summary": "Dirt Church 2026",
-    "description": "Mountain bike camping weekend organized by Midwest Dirt Legion.<br><br>When: August 7-9, 2026 (3-day event)<br><br>Location: Cuyuna (red dirt trails)<br><br>This event is an opportunity for the FTW community to come together and take over the trails for three days. Expect group rides, clinics, camaraderie, swimming, good people, and getting super sendy.<br><br>Tickets: Will go on sale in early April.<br><br>Link: <a href=\"https://www.instagram.com/p/DU8uJ_kjz4I/\">https://www.instagram.com/p/DU8uJ_kjz4I/</a><br><br>Sign up for Midwest Dirt Legion's newsletter to be the first to know when tickets go on sale.",
-    "location": "Cuyuna",
-    "creator": {
-      "email": "bicyclegroupsorg@bicyclegroupsorg.iam.gserviceaccount.com"
-    },
-    "organizer": {
-      "email": "6a256e25e316cc67771b99bd499dfa57d2780d51f6eb5f9df1a9d84299a1b3c2@group.calendar.google.com",
-      "displayName": "Minneapolis Cycling Events",
-      "self": true
-    },
-    "start": {
-      "date": "2026-08-07"
-    },
-    "end": {
-      "date": "2026-08-10"
-    },
-    "iCalUID": "8akl3meb1o7jdvi983ikglerb0@google.com",
-    "sequence": 0,
-    "reminders": {
-      "useDefault": false
-    },
-    "eventType": "default",
-    "source_id": "ig-midwestdirtlegion",
-    "extra_metadata": {
-      "id": 23,
-      "post_guid": "ff0a249b117a7cb6",
-      "processed_at": "2026-02-22T03:17:23.195981+00:00",
-      "decision": "create",
-      "calendar_event_id": "8akl3meb1o7jdvi983ikglerb0",
-      "post_content": "<p>SAVE THE DATE. We know your summer fills FAST \ud83d\udeb5\u200d\u2642\ufe0f\ud83d\udca8 Mark your calendars for Dirt Church 2026. We'll be ripping up the red dirt of Cuyuna from August 7-9th. Tickets will go on sale early April.\n\nDirt Church is Midwest Dirt Legion's mountain bike camping weekend. This event is an opportunity for the FTW community to come together and take over the trails of a destination for the three days in a row. You can expect group rides, clinics, camaraderie, swimming, good people, and getting super sendy. \n\n\ud83d\udc49 Want to be the first in the know? Sign up for our newsletter (link in bio).</p>\n\n\n\n\n<p><img src=\"https://rssglue.subdavis.com/media/c0/c00995e15470595f6988b57a23080bf7bfe7b7201a2346810596508ee6999bf6.jpg\" /></p>\n\n\n<p><small>\u2764\ufe0f 28 likes | \ud83d\udcac 0 comments</small></p>",
-      "reasoning": "This is a clear event announcement for \"Dirt Church 2026\", a mountain bike camping weekend scheduled for August 7-9, 2026 at Cuyuna. The post provides specific dates, location (Cuyuna), and describes it as a mountain bike camping weekend with group rides, clinics, swimming, and community activities organized by Midwest Dirt Legion. The image confirms the dates (AUGUST 7-9 2026) and event name. No duplicate events found in the calendar. Tickets will go on sale in early April. This is a multi-day event so I'm using the start date (August 7).",
-      "input_tokens": 14873,
-      "output_tokens": 920,
-      "cost_usd": 0.058419,
-      "post_title": "SAVE THE DATE. We know your summer fills FAST \ud83d\udeb5\u200d\u2642\ufe0f\ud83d\udca8 Mark your calendars for Dirt Church 2026. We'll",
-      "post_author": "@midwestdirtlegion",
-      "post_time": "2026-02-19T18:00:20+00:00",
-      "post_link": "https://www.instagram.com/p/DU8uJ_kjz4I/",
-      "event_title": "Dirt Church 2026",
-      "event_date": "2026-08-07",
-      "event_time": null,
-      "event_location": "Cuyuna",
-      "post_extra": {
-        "rssglue_score": "42",
-        "rssglue_source_feed_id": "ig-midwestdirtlegion",
-        "rssglue_source_feed_type": "instagram"
-      }
-    },
-    "image_urls": [
-      "https://rssglue.subdavis.com/media/c0/c00995e15470595f6988b57a23080bf7bfe7b7201a2346810596508ee6999bf6.jpg"
-    ]
-  },
-  {
-    "kind": "calendar#event",
     "etag": "\"3544601429176414\"",
     "id": "5fpcaltcfg2b18sam5do2rv8pl",
     "status": "confirmed",
@@ -820,5 +759,66 @@
     "eventType": "default",
     "extra_metadata": null,
     "image_urls": []
+  },
+  {
+    "kind": "calendar#event",
+    "etag": "\"3544634333522206\"",
+    "id": "8akl3meb1o7jdvi983ikglerb0",
+    "status": "confirmed",
+    "htmlLink": "https://www.google.com/calendar/event?eid=OGFrbDNtZWIxbzdqZHZpOTgzaWtnbGVyYjAgNmEyNTZlMjVlMzE2Y2M2Nzc3MWI5OWJkNDk5ZGZhNTdkMjc4MGQ1MWY2ZWI1ZjlkZjFhOWQ4NDI5OWExYjNjMkBn",
+    "created": "2026-02-22T03:17:22.000Z",
+    "updated": "2026-02-28T22:19:26.761Z",
+    "summary": "Dirt Church 2026",
+    "description": "Mountain bike camping weekend organized by Midwest Dirt Legion.<br><br>When: August 7-9, 2026 (3-day event)<br><br>Location: Cuyuna (red dirt trails)<br><br>This event is an opportunity for the FTW community to come together and take over the trails for three days. Expect group rides, clinics, camaraderie, swimming, good people, and getting super sendy.<br><br>Tickets: Will go on sale in early April.<br><br>Link: <a href=\"https://www.instagram.com/p/DU8uJ_kjz4I/\">https://www.instagram.com/p/DU8uJ_kjz4I/</a><br><br>Sign up for Midwest Dirt Legion's newsletter to be the first to know when tickets go on sale.",
+    "location": "Cuyuna, MN, USA",
+    "creator": {
+      "email": "bicyclegroupsorg@bicyclegroupsorg.iam.gserviceaccount.com"
+    },
+    "organizer": {
+      "email": "6a256e25e316cc67771b99bd499dfa57d2780d51f6eb5f9df1a9d84299a1b3c2@group.calendar.google.com",
+      "displayName": "Minneapolis Cycling Events",
+      "self": true
+    },
+    "start": {
+      "date": "2026-08-07"
+    },
+    "end": {
+      "date": "2026-08-10"
+    },
+    "iCalUID": "8akl3meb1o7jdvi983ikglerb0@google.com",
+    "sequence": 0,
+    "reminders": {
+      "useDefault": false
+    },
+    "eventType": "default",
+    "source_id": "ig-midwestdirtlegion",
+    "extra_metadata": {
+      "id": 23,
+      "post_guid": "ff0a249b117a7cb6",
+      "processed_at": "2026-02-22T03:17:23.195981+00:00",
+      "decision": "create",
+      "calendar_event_id": "8akl3meb1o7jdvi983ikglerb0",
+      "post_content": "<p>SAVE THE DATE. We know your summer fills FAST \ud83d\udeb5\u200d\u2642\ufe0f\ud83d\udca8 Mark your calendars for Dirt Church 2026. We'll be ripping up the red dirt of Cuyuna from August 7-9th. Tickets will go on sale early April.\n\nDirt Church is Midwest Dirt Legion's mountain bike camping weekend. This event is an opportunity for the FTW community to come together and take over the trails of a destination for the three days in a row. You can expect group rides, clinics, camaraderie, swimming, good people, and getting super sendy. \n\n\ud83d\udc49 Want to be the first in the know? Sign up for our newsletter (link in bio).</p>\n\n\n\n\n<p><img src=\"https://rssglue.subdavis.com/media/c0/c00995e15470595f6988b57a23080bf7bfe7b7201a2346810596508ee6999bf6.jpg\" /></p>\n\n\n<p><small>\u2764\ufe0f 28 likes | \ud83d\udcac 0 comments</small></p>",
+      "reasoning": "This is a clear event announcement for \"Dirt Church 2026\", a mountain bike camping weekend scheduled for August 7-9, 2026 at Cuyuna. The post provides specific dates, location (Cuyuna), and describes it as a mountain bike camping weekend with group rides, clinics, swimming, and community activities organized by Midwest Dirt Legion. The image confirms the dates (AUGUST 7-9 2026) and event name. No duplicate events found in the calendar. Tickets will go on sale in early April. This is a multi-day event so I'm using the start date (August 7).",
+      "input_tokens": 14873,
+      "output_tokens": 920,
+      "cost_usd": 0.058419,
+      "post_title": "SAVE THE DATE. We know your summer fills FAST \ud83d\udeb5\u200d\u2642\ufe0f\ud83d\udca8 Mark your calendars for Dirt Church 2026. We'll",
+      "post_author": "@midwestdirtlegion",
+      "post_time": "2026-02-19T18:00:20+00:00",
+      "post_link": "https://www.instagram.com/p/DU8uJ_kjz4I/",
+      "event_title": "Dirt Church 2026",
+      "event_date": "2026-08-07",
+      "event_time": null,
+      "event_location": "Cuyuna",
+      "post_extra": {
+        "rssglue_score": "42",
+        "rssglue_source_feed_id": "ig-midwestdirtlegion",
+        "rssglue_source_feed_type": "instagram"
+      }
+    },
+    "image_urls": [
+      "https://rssglue.subdavis.com/media/c0/c00995e15470595f6988b57a23080bf7bfe7b7201a2346810596508ee6999bf6.jpg"
+    ]
   }
 ]

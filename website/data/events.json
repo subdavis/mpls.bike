@@ -1,69 +1,6 @@
 [
   {
     "kind": "calendar#event",
-    "etag": "\"3542908223780830\"",
-    "id": "3iis3i5gbsr81pvmdma5kg466m",
-    "status": "confirmed",
-    "htmlLink": "https://www.google.com/calendar/event?eid=M2lpczNpNWdic3I4MXB2bWRtYTVrZzQ2Nm0gNmEyNTZlMjVlMzE2Y2M2Nzc3MWI5OWJkNDk5ZGZhNTdkMjc4MGQ1MWY2ZWI1ZjlkZjFhOWQ4NDI5OWExYjNjMkBn",
-    "created": "2026-02-18T22:35:05.000Z",
-    "updated": "2026-02-18T22:35:11.890Z",
-    "summary": "Behind Bars Fixed gear ride",
-    "description": "<p dir=\"ltr\"><span>Group ride (no-drop)</span> <span><b>Behind Bars Fixed gear ride. </b></span><a href=\"https://www.instagram.com/p/DUzNnD1jo_Z/\"><span><u>Instagram</u></span></a><span>.</span></p><p dir=\"ltr\"><span><b>When: </b></span><span>Friday </span><span>Feb 27, 2026 5:30\u202fPM</span><span>. Meet at 5:30 PM, roll at 6 PM</span></p><p dir=\"ltr\"><span><b>Start and Finish</b></span><span>: </span><a href=\"https://www.google.com/maps/place/Behind+Bars+Bicycle+Shop/data=!4m2!3m1!19sChIJEcRDj3cys1IRIe_IvkrciVw\"><span><u>Behind Bars Bicycle Shop</u></span></a><span>\u00a0</span></p><p dir=\"ltr\"><span><b>Distance</b></span><span>: Likely ~10 miles. </span><span><b>Pace</b></span><span>: likely ~12 mph.\u00a0</span></p><p dir=\"ltr\"><span>(Fixed gear preferred, and trying to get some footage while we ride)</span></p><p dir=\"ltr\"><span>Mellow cruise through downtown (likely up Hennepin to Loring park, and back down Nicollet mall)</span></p>",
-    "location": "Behind Bars Bicycle Shop, 208 13th Ave NE, Minneapolis, MN 55413, USA",
-    "creator": {
-      "email": "jmbangsund@gmail.com"
-    },
-    "organizer": {
-      "email": "6a256e25e316cc67771b99bd499dfa57d2780d51f6eb5f9df1a9d84299a1b3c2@group.calendar.google.com",
-      "displayName": "Minneapolis Cycling Events",
-      "self": true
-    },
-    "start": {
-      "dateTime": "2026-02-27T17:30:00-06:00",
-      "timeZone": "America/Chicago"
-    },
-    "end": {
-      "dateTime": "2026-02-27T19:30:00-06:00",
-      "timeZone": "America/Chicago"
-    },
-    "iCalUID": "3iis3i5gbsr81pvmdma5kg466m@google.com",
-    "sequence": 0,
-    "reminders": {
-      "useDefault": true
-    },
-    "eventType": "default",
-    "source_id": "ig-behindbarsbicycleshop",
-    "extra_metadata": {
-      "id": 10,
-      "post_guid": "66a02faebd16c4c2",
-      "processed_at": "2026-02-22T03:14:36.080077+00:00",
-      "decision": "ignore",
-      "calendar_event_id": "3iis3i5gbsr81pvmdma5kg466m",
-      "post_content": "<p>Gonna be leading a fixed gear ride for @behindbarsbicycleshop on Friday the 27th!\n5:30 pm meetup, 6 pm departure. (Fixed gear preferred, and trying to get some footage while we ride)\nMellow cruise through downtown (likely up Hennepin to Loring park, and back down Nicollet mall)\nI'll have a bunch of Astral Drift stickers for anyone who shows up \ud83e\udd19 \n#fixedgear #fixie #minneapoliscycling</p>\n\n\n\n\n<p><img src=\"https://rssglue.subdavis.com/media/84/8457ca7ecd562246d2f9571f0d094b4d902b271e94ff5b4d3fdf22659bbf76ae.webp\" /></p>\n\n\n<p><small>\u2764\ufe0f 18 likes | \ud83d\udcac 0 comments</small></p>\n\n<p><small>\ud83c\udfb5 Gainesville - Dillinger Four</small></p>",
-      "reasoning": "This post announces a fixed gear ride on Friday, February 27, 2026 at Behind Bars Bicycle Shop. However, this event already exists in the calendar (ID: 3iis3i5gbsr81pvmdma5kg466m) with all the relevant details including the meetup time (5:30 PM), departure time (6 PM), location, and route description. This is a duplicate announcement.",
-      "input_tokens": 14694,
-      "output_tokens": 1015,
-      "cost_usd": 0.059307000000000006,
-      "post_title": "Gonna be leading a fixed gear ride for @behindbarsbicycleshop on Friday the 27th!",
-      "post_author": "@thepinoycowboy",
-      "post_time": "2026-02-16T01:22:48+00:00",
-      "post_link": "https://www.instagram.com/p/DUzNnD1jo_Z/",
-      "event_title": "Behind Bars Fixed gear ride",
-      "event_date": "2026-02-27",
-      "event_time": "17:30",
-      "event_location": "Behind Bars Bicycle Shop",
-      "post_extra": {
-        "rssglue_score": "58",
-        "rssglue_source_feed_id": "ig-behindbarsbicycleshop",
-        "rssglue_source_feed_type": "instagram"
-      }
-    },
-    "image_urls": [
-      "https://rssglue.subdavis.com/media/84/8457ca7ecd562246d2f9571f0d094b4d902b271e94ff5b4d3fdf22659bbf76ae.webp"
-    ]
-  },
-  {
-    "kind": "calendar#event",
     "etag": "\"3544150933872830\"",
     "id": "q769hs0bjvh8sq1ho00fce3qms",
     "status": "confirmed",
@@ -546,8 +483,8 @@
       "useDefault": true
     },
     "eventType": "default",
-    "recurrence_future_count": 17,
-    "recurrence_label": "And 16 more",
+    "recurrence_future_count": 18,
+    "recurrence_label": "And 17 more",
     "extra_metadata": null,
     "image_urls": []
   },

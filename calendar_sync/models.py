@@ -16,22 +16,42 @@ class Action(str, Enum):
 
 
 class Tag(str, Enum):
-    GROUP_RIDE_NO_DROP = "group_ride_no_drop"
-    GROUP_RIDE_DROP = "group_ride_drop"
-    SELF_SUPPORTED_RIDE = "self_supported_ride"
-    ORGANIZED_RIDE = "organized_ride"
-    RACE_ALLEYCAT = "race_alleycat"
-    RACE_CX = "race_cx"
-    RACE_GRAVEL = "race_gravel"
-    RACE_MTB = "race_mtb"
-    RACE_OTHER = "race_other"
-    BIKE_POLO = "bike_polo"
-    CLASS_SEMINAR = "class_seminar"
+    GROUP_RIDE_NO_DROP = "nodrop"
+    GROUP_RIDE_DROP = "drop"
+    SELF_SUPPORTED_RIDE = "selfsupported"
+    ORGANIZED_RIDE = "organized"
+    RACE_ALLEYCAT = "alleycat"
+    RACE_CX = "cx"
+    RACE_GRAVEL = "gravel"
+    RACE_MTB = "mtb"
+    RACE_OTHER = "race"
+    BIKE_POLO = "polo"
+    CLASS_SEMINAR = "class"
     GATHERING = "gathering"
-    SKILLS_CLINIC = "skills_clinic"
+    SKILLS_CLINIC = "clinic"
     CAMPING = "camping"
     MAINTENANCE = "maintenance"
-    SALE_SWAP_MEET = "sale_swap_meet"
+    SALE_SWAP_MEET = "swap"
+
+
+TAG_TITLES = {
+    Tag.GROUP_RIDE_NO_DROP: "Group Ride (No Drop)",
+    Tag.GROUP_RIDE_DROP: "Group Ride (Drop)",
+    Tag.SELF_SUPPORTED_RIDE: "Self-Supported Ride",
+    Tag.ORGANIZED_RIDE: "Organized Ride",
+    Tag.RACE_ALLEYCAT: "Alleycat Race",
+    Tag.RACE_CX: "Cyclocross Race",
+    Tag.RACE_GRAVEL: "Gravel Race",
+    Tag.RACE_MTB: "Mountain Bike Race",
+    Tag.RACE_OTHER: "Other Race",
+    Tag.BIKE_POLO: "Bike Polo",
+    Tag.CLASS_SEMINAR: "Class or Seminar",
+    Tag.GATHERING: "Social Gathering",
+    Tag.SKILLS_CLINIC: "Skills Clinic",
+    Tag.CAMPING: "Camping",
+    Tag.MAINTENANCE: "Maintenance/Repair",
+    Tag.SALE_SWAP_MEET: "Sale or Swap Meet",
+}
 
 
 class EventDetails(BaseModel):

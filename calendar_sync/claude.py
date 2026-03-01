@@ -18,7 +18,7 @@ from .models import Action, ClaudeDecision, EventDetails, RssPost
 INPUT_COST_PER_M = 3.00
 OUTPUT_COST_PER_M = 15.00
 CACHE_WRITE_COST_PER_M = 3.75  # 25% surcharge over input price
-CACHE_READ_COST_PER_M = 0.30   # 10% of input price
+CACHE_READ_COST_PER_M = 0.30  # 10% of input price
 MODEL_NAME = "claude-sonnet-4-6"
 TIME_ZONE = "America/Chicago"
 
@@ -90,9 +90,15 @@ class SessionLogger:
         with open(self.log_path, "a") as f:
             f.write(f"=== TURN {self.turn} ===\n")
             f.write(f"Stop reason: {response.stop_reason}\n")
-            cache_create = getattr(response.usage, "cache_creation_input_tokens", 0) or 0
+            cache_create = (
+                getattr(response.usage, "cache_creation_input_tokens", 0) or 0
+            )
             cache_read = getattr(response.usage, "cache_read_input_tokens", 0) or 0
-            cache_str = f" | {cache_create} cache_write / {cache_read} cache_read" if (cache_create or cache_read) else ""
+            cache_str = (
+                f" | {cache_create} cache_write / {cache_read} cache_read"
+                if (cache_create or cache_read)
+                else ""
+            )
             f.write(
                 f"Tokens: {response.usage.input_tokens} in / {response.usage.output_tokens} out{cache_str}\n\n"
             )
@@ -136,7 +142,9 @@ class SessionLogger:
             f.write("=== SESSION COMPLETE ===\n")
             f.write(f"Total tokens: {ctx.input_tokens} in / {ctx.output_tokens} out")
             if ctx.cache_creation_tokens or ctx.cache_read_tokens:
-                f.write(f" | {ctx.cache_creation_tokens} cache_write / {ctx.cache_read_tokens} cache_read")
+                f.write(
+                    f" | {ctx.cache_creation_tokens} cache_write / {ctx.cache_read_tokens} cache_read"
+                )
             f.write("\n")
             f.write(f"Cost: ${ctx.cost_usd:.4f}\n")
             f.write(f"Decisions: {len(ctx.decisions)}\n")
@@ -702,8 +710,12 @@ def analyze_post(post: RssPost, dry_run: bool = False) -> AnalysisContext:
         # Track tokens (including cache variants billed at different rates)
         ctx.input_tokens += response.usage.input_tokens
         ctx.output_tokens += response.usage.output_tokens
-        ctx.cache_creation_tokens += getattr(response.usage, "cache_creation_input_tokens", 0) or 0
-        ctx.cache_read_tokens += getattr(response.usage, "cache_read_input_tokens", 0) or 0
+        ctx.cache_creation_tokens += (
+            getattr(response.usage, "cache_creation_input_tokens", 0) or 0
+        )
+        ctx.cache_read_tokens += (
+            getattr(response.usage, "cache_read_input_tokens", 0) or 0
+        )
 
         if response.stop_reason == "tool_use":
             tool_results = []

@@ -28,10 +28,6 @@ article.event-detail a {
   @apply border border-gray-300 bg-white;
 }
 
-.schedule-card__accent-border {
-  @apply bg-stone-600;
-}
-
 .calendar-description a {
   @apply text-blue-600 underline;
 }
@@ -39,23 +35,45 @@ article.event-detail a {
   @apply pb-2;
 }
 
+/* ===== Tag color system ===== */
+
+@theme {
+  --color-tag-nodrop:        #e5cff2;
+  --color-tag-drop:          #3d3d3d;
+  --color-tag-selfsupported: #f9dda9;
+  --color-tag-organized:     #0a53a8;
+  --color-tag-alleycat:      #dabea4;
+  --color-tag-cx:            #11734b;
+  --color-tag-gravel:        #ffe5a0;
+  --color-tag-mtb:           #ffcfc9;
+  --color-tag-race:          #ffc8aa;
+  --color-tag-polo:          #c6dbe1;
+  --color-tag-class:         #ffb0dc;
+  --color-tag-gathering:     #4338ca;
+  --color-tag-clinic:        #11734b;
+  --color-tag-camping:       #215a6c;
+  --color-tag-maintenance:   #473822;
+  --color-tag-swap:          #9333ea;
+  --color-tag-recurring:     var(--color-stone-200);
+}
+
 /* Custom metadata styles for event cards on the events/ page by source */
 
 /* Behind Bars Bicycle Shop */
-article.ig-behindbarsbicycleshop .schedule-card__accent-border {
+/* article.ig-behindbarsbicycleshop .schedule-card__accent-border {
   @apply bg-linear-to-t from-[#6dade4] to-[#e220ec];
-}
+} */
 
 /* Recovery Bike Shop */
-article.ig-recoverybikeshop .schedule-card__accent-border {
+/* article.ig-recoverybikeshop .schedule-card__accent-border {
   @apply bg-[#b42224];
 }
 article.ig-recoverybikeshop .schedule-card {
   @apply text-[#b42224];
-}
+} */
 
 /* Bone Saw Cycling Collective */
-article.ig-bonesawcyclingcollective .schedule-card__accent-border {
+/* article.ig-bonesawcyclingcollective .schedule-card__accent-border {
   @apply hidden;
 }
 article.ig-bonesawcyclingcollective .schedule-card {
@@ -73,4 +91,4 @@ article.ig-bonesawcyclingcollective .schedule-card::before {
     url('/images/bone-border.png') repeat-y right top / 12px auto,
     url('/images/bone-border-h.png') repeat-x left top / auto 12px,
     url('/images/bone-border-h.png') repeat-x left bottom / auto 12px;
-}
+} */

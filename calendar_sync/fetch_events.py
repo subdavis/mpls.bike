@@ -7,10 +7,17 @@ from zoneinfo import ZoneInfo
 import json
 
 from . import calendar, claude, db, rss
+from .models import Tag, TAG_TITLES
 
 
 # Matches any tag-like substring — used for HTML detection only
 _HTML_TAG_RE = re.compile(r"<[a-zA-Z/][^>]*>")
+
+# Splits a description into lines on newlines or any <br> variant
+_LINE_SEP_RE = re.compile(r"\n|<br\s*/?>", re.IGNORECASE)
+
+# Strips all HTML tags (used when parsing tag values)
+_STRIP_HTML_RE = re.compile(r"<[^>]+>")
 
 # Matches bare URLs not already inside an href="…" attribute
 _URL_RE = re.compile(
@@ -158,6 +165,45 @@ def _base_event_id(event_id: str) -> str | None:
     return None
 
 
+def _parse_and_strip_tags(description: str) -> tuple[list[str], str]:
+    """Extract tags from a 'Tags: …' line in the description.
+
+    Returns (tag_strings, cleaned_description).  The Tags: line is removed
+    from the returned description.  Handles both plain-text descriptions
+    (newline-separated) and HTML descriptions (<br>-separated).  HTML markup
+    within the tag values themselves (e.g. <b>tag1</b>) is stripped before
+    the values are parsed.
+    """
+    if not description:
+        return [], description
+
+    uses_br = bool(re.search(r"<br", description, re.IGNORECASE))
+    segments = _LINE_SEP_RE.split(description)
+
+    tags: list[str] = []
+    kept: list[str] = []
+
+    for seg in segments:
+        plain = _STRIP_HTML_RE.sub("", seg).strip()
+        m = re.match(r"tags?:\s*(.+)", plain, re.IGNORECASE)
+        if m:
+            tag_text = m.group(1).strip()
+            tags = [
+                t.strip().lower().replace(" ", "_")
+                for t in tag_text.split(",")
+                if t.strip()
+            ]
+        else:
+            kept.append(seg)
+
+    # Drop trailing blank segments introduced by removing the Tags: line
+    while kept and not _STRIP_HTML_RE.sub("", kept[-1]).strip():
+        kept.pop()
+
+    separator = "<br>" if uses_br else "\n"
+    return tags, separator.join(kept)
+
+
 def _transform_description(description: str) -> str:
     """Normalise a plain-text calendar description to simple HTML.
 
@@ -204,8 +250,18 @@ def _attach_metadata(events: list[dict]) -> None:
             if row and row.get("post_content")
             else []
         )
-        if description := event.get("description"):
-            event["description"] = _transform_description(description)
+        raw_description = event.get("description") or ""
+        tags, cleaned = _parse_and_strip_tags(raw_description)
+        known_values = {t.value for t in Tag}
+        known_tags = [t for t in tags if t in known_values]
+        event["tags"] = tags
+        event["known_tags"] = [(t, TAG_TITLES.get(t, t)) for t in known_tags]
+        event["first_known_tag"] = known_tags[0] if known_tags else None
+
+        if cleaned:
+            event["description"] = _transform_description(cleaned)
+        else:
+            event.pop("description", None)
 
 
 def build_events_json() -> list[dict]:

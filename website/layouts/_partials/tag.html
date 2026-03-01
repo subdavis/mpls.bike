@@ -1,0 +1,7 @@
+{{/* Renders a tag chip.
+     Expects a dict: "tag" ([value, display_name] slice), optional "small" bool. */}}
+{{ $tag := .tag }}
+{{ $cls := cond .small "px-1.5 py-0.5 rounded-sm text-[10px]" "px-2.5 py-1 rounded-full text-xs font-medium" }}
+<span class="bg-tag-{{ index $tag 0 }} text-stone-800 {{ $cls }}">
+  {{- index $tag 1 -}}
+</span>

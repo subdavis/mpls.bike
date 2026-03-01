@@ -74,6 +74,14 @@
     </div>
     {{ end }}
 
+    {{/* Tags */}}
+    {{ with .Params.known_tags }}
+    <div class="flex flex-wrap gap-3">
+      <span class="text-base shrink-0 w-6 text-center" aria-hidden="true">🏷️</span>
+      {{ range . }}{{ partial "tag.html" (dict "tag" .) }}{{ end }}
+    </div>
+    {{ end }}
+
     <hr class="border-stone-300 my-4">
 
     {{/* Description */}}

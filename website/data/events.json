@@ -319,14 +319,15 @@
   },
   {
     "kind": "calendar#event",
-    "etag": "\"3543460685105886\"",
+    "etag": "\"3544669977682718\"",
     "id": "1ujqs0p31sc4dh90ocd9k5g2it_20260301T160000Z",
     "status": "confirmed",
     "htmlLink": "https://www.google.com/calendar/event?eid=MXVqcXMwcDMxc2M0ZGg5MG9jZDlrNWcyaXRfMjAyNjAzMDFUMTYwMDAwWiA2YTI1NmUyNWUzMTZjYzY3NzcxYjk5YmQ0OTlkZmE1N2QyNzgwZDUxZjZlYjVmOWRmMWE5ZDg0Mjk5YTFiM2MyQGc",
     "created": "2025-04-10T20:39:24.000Z",
-    "updated": "2026-02-22T03:19:02.552Z",
-    "summary": "Coffee (Outside) by Recovery Bike Shop",
-    "description": "<p dir=\"ltr\"><span>Coffee (Outside) by Recovery Bike Shop. </span><a href=\"http://recovery.bike/events\"><span><u>Website</u></span></a><span>. </span><a href=\"https://www.instagram.com/recoverybikeshop/\"><span><u>Instagram</u></span></a><span>.</span></p><p dir=\"ltr\"><span>Every Sunday at 10am.</span></p><p dir=\"ltr\"><span>Start: Check @RecoveryBikeShop on Instagram for NE location reveal the day before</span></p><p dir=\"ltr\"><span>This is a bike-themed meetup every Sunday at 10am. Not a ride. It\u2019s just coffee and hanging out. New location in NE Mpls every week. We bring treats. BYO coffee.</span></p>",
+    "updated": "2026-03-01T03:16:28.841Z",
+    "summary": "Coffee (Outside) at El Paraiso Supermarket",
+    "description": "Community coffee meetup at El Paraiso Supermarket to support this local Ecuadorian business.\n\n<b>Time</b>: 10:00 AM on the sidewalk in front of El Paraiso. Optional: 9am yoga (free) at Recovery Bike Shop beforehand.\n\n<b>Location</b>: El Paraiso Supermarket (29th and Central, Northeast Minneapolis)\n\nAll are welcome. Bring your own coffee or buy a cup inside the market. Recovery Bike Shop will bring treats to share. Make sure to go inside and explore the supermarket and their recently reopened restaurant with Ecuadorian breakfast menu!\n\nThis event is part of the \"What Can I Do?\" community support series.\n\n<b>Link</b>: <a href=\"https://www.instagram.com/p/DVTiS_9jrdl/\">https://www.instagram.com/p/DVTiS_9jrdl/</a>",
+    "location": "El Paraiso Supermarket, 29th and Central, Northeast Minneapolis",
     "creator": {
       "email": "jmbangsund@gmail.com"
     },
@@ -340,7 +341,7 @@
       "timeZone": "America/Chicago"
     },
     "end": {
-      "dateTime": "2026-03-01T11:00:00-06:00",
+      "dateTime": "2026-03-01T12:00:00-06:00",
       "timeZone": "America/Chicago"
     },
     "recurringEventId": "1ujqs0p31sc4dh90ocd9k5g2it",
@@ -356,8 +357,35 @@
     "eventType": "default",
     "recurrence_future_count": 18,
     "recurrence_label": "And 17 more",
-    "extra_metadata": null,
-    "image_urls": []
+    "source_id": "ig-recoverybikeshop",
+    "extra_metadata": {
+      "id": 51,
+      "post_guid": "35e25ff441c61cc5",
+      "processed_at": "2026-03-01T03:16:29.173540+00:00",
+      "decision": "update",
+      "calendar_event_id": "1ujqs0p31sc4dh90ocd9k5g2it_20260301T160000Z",
+      "post_content": "<p>This Coffee (Outside) on Sunday at 10am comes by request from a community member that wants to see El Paraiso Supermarket get the support they need. (29th and Central).\n\nFirst, El Paraiso is so much more than meets the eye. Most important to me is the reopening of their restaurant including their Ecuadorian BREAKFAST menu!\n\nEl Paraiso has been through a lot. The guy that runs the kitchen is still being illegally detained in Texas with no end in sight. Paraiso opened late last year and immediately went straight into the ICE invasion. And they\u2019ve been working hard to get back to full operations.\n\nCome to Recovery Bike Shop for 9am yoga (free). Then join us at 10:00 on the sidewalk in front of El Paraiso. But make sure to go inside and explore. The no-frills storefront does not do justice to everything available inside.\n\nAll are welcome. Bring your own coffee or buy a cup inside the market (or not at all). We\u2019 bring some delicious treats to share. Can\u2019t wait to see you!\n\nPHOTO: Miryan with El Paraiso\u2019s full menu!\n\nWe are #NortheastMinneapolis\n\n#Mpls\n#WhatCanIdo\n#EatDrinkDishMpls\n#Humanity_Shots</p>\n\n\n\n\n<p><img src=\"https://rssglue.subdavis.com/media/c8/c8cc79cbc6447c9396ea20e34b90e103390e5f862a0db7fd83192bba76b32ab2.jpg\" /></p>\n\n\n<p><small>\u2764\ufe0f 100 likes | \ud83d\udcac 0 comments</small></p>\n\n<p><small>\ud83c\udfb5 Meet Me At Sunset (Instrumental) - Makana</small></p>",
+      "reasoning": "This post announces the specific location and details for the weekly Coffee (Outside) event on Sunday, March 1, 2026 at 10am. An existing recurring event exists in the calendar, but this post provides the specific location reveal (El Paraiso Supermarket at 29th and Central) and additional context including a 9am yoga session beforehand at Recovery Bike Shop. The post mentions bringing treats and supporting the local business. This is an update to add the specific location and enhanced details to the existing recurring event.",
+      "input_tokens": 15854,
+      "output_tokens": 1056,
+      "cost_usd": 0.063402,
+      "post_title": "This Coffee (Outside) on Sunday at 10am comes by request from a community member that wants to see E",
+      "post_author": "@recoverybikeshop",
+      "post_time": "2026-02-28T14:43:38+00:00",
+      "post_link": "https://www.instagram.com/p/DVTiS_9jrdl/",
+      "event_title": "Coffee (Outside) at El Paraiso Supermarket",
+      "event_date": "2026-03-01",
+      "event_time": "10:00",
+      "event_location": "El Paraiso Supermarket, 29th and Central, Northeast Minneapolis",
+      "post_extra": {
+        "rssglue_score": "100",
+        "rssglue_source_feed_id": "ig-recoverybikeshop",
+        "rssglue_source_feed_type": "instagram"
+      }
+    },
+    "image_urls": [
+      "https://rssglue.subdavis.com/media/c8/c8cc79cbc6447c9396ea20e34b90e103390e5f862a0db7fd83192bba76b32ab2.jpg"
+    ]
   },
   {
     "kind": "calendar#event",

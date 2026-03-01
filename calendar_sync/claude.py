@@ -14,9 +14,10 @@ from pydantic import ValidationError
 from . import calendar, db
 from .models import Action, ClaudeDecision, EventDetails, RssPost
 
-# Pricing per million tokens (Claude 3.5 Sonnet)
+# Pricing per million tokens (Claude 4.6 Sonnet)
 INPUT_COST_PER_M = 3.00
 OUTPUT_COST_PER_M = 15.00
+MODEL_NAME = "claude-sonnet-4-6"
 TIME_ZONE = "America/Chicago"
 
 
@@ -622,6 +623,11 @@ def handle_submit_decision(input_data: dict, ctx: AnalysisContext) -> dict:
                 calendar.delete_event(decision.related_event_id)
                 calendar_event_id = decision.related_event_id
 
+        # cost should only be logged for the final decision (submitted with done=true)
+        # to avoid double-counting costs if multiple decisions are submitted for one post.
+        done = input_data.get("done", True)
+        cost_usd = ctx.cost_usd if done else 0.0
+
         # Record to database
         db.record_processed(
             post_guid=ctx.post.guid,
@@ -631,7 +637,7 @@ def handle_submit_decision(input_data: dict, ctx: AnalysisContext) -> dict:
             reasoning=decision.reasoning,
             input_tokens=ctx.input_tokens,
             output_tokens=ctx.output_tokens,
-            cost_usd=ctx.cost_usd,
+            cost_usd=cost_usd,
             post_title=ctx.post.title,
             post_author=ctx.post.author,
             post_time=ctx.post.published.isoformat() if ctx.post.published else None,
@@ -643,7 +649,6 @@ def handle_submit_decision(input_data: dict, ctx: AnalysisContext) -> dict:
         ctx.decisions.append(decision)
         ctx.calendar_event_ids.append(calendar_event_id)
 
-        done = input_data.get("done", True)
         return {
             "success": True,
             "action": decision.action.value,
@@ -675,7 +680,7 @@ def analyze_post(post: RssPost, dry_run: bool = False) -> AnalysisContext:
     max_turns = 10
     for _ in range(max_turns):
         response = client.messages.create(
-            model="claude-sonnet-4-5",
+            model=MODEL_NAME,
             max_tokens=4096,
             system=SYSTEM_PROMPT,
             tools=TOOLS,  # ty: ignore[invalid-argument-type]

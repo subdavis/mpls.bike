@@ -8,10 +8,9 @@ from anthropic.types import TextBlock
 
 from .models import RssPost
 
-# Haiku 4.5 pricing per million tokens
-HAIKU_INPUT_COST_PER_M = 1.00
-HAIKU_OUTPUT_COST_PER_M = 5.00
-HAIKU_MODEL = "claude-sonnet-4-5"
+PREFILTER_INPUT_COST_PER_M = 3.00
+PREFILTER_OUTPUT_COST_PER_M = 15.00
+PREFILTER_MODEL = "claude-sonnet-4-6"
 
 PREFILTER_PROMPT = f"""You are a binary classifier. Given an RSS post from a cycling community social account, determine if the post could plausibly be announcing an event (a ride, meetup, race, social gathering, etc. with a date/time).
 
@@ -40,13 +39,13 @@ class PrefilterResult:
     @property
     def cost_usd(self) -> float:
         return (
-            self.input_tokens * HAIKU_INPUT_COST_PER_M / 1_000_000
-            + self.output_tokens * HAIKU_OUTPUT_COST_PER_M / 1_000_000
+            self.input_tokens * PREFILTER_INPUT_COST_PER_M / 1_000_000
+            + self.output_tokens * PREFILTER_OUTPUT_COST_PER_M / 1_000_000
         )
 
 
 def prefilter_post(post: RssPost) -> PrefilterResult:
-    """Run a cheap Haiku check to see if a post is plausibly an event.
+    """Run a cheap check to see if a post is plausibly an event.
 
     Returns a PrefilterResult. If is_likely_event is False, the post can be
     short-circuited to "ignore" without running the full Sonnet analysis.
@@ -65,7 +64,7 @@ Content:
 """
 
     response = client.messages.create(
-        model=HAIKU_MODEL,
+        model=PREFILTER_MODEL,
         max_tokens=8,
         system=PREFILTER_PROMPT,
         messages=[{"role": "user", "content": user_text}],

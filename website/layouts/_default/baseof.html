@@ -58,10 +58,7 @@
     <img id="footer-bike" src="{{ $imageFooter.Permalink }}" alt="Footer of a bicycle" width="300px"
       class="mx-auto h-auto contrast-200" style="cursor: pointer; user-select: none" />
   </footer>
-  <div class="maintainer-mode text-center pb-4 text-xs text-stone-500 hidden">
-    <span class="inline-block px-3 py-1 bg-stone-200 rounded-full">Maintainer mode</span>
-  </div>
-  {{ with resources.Get "js/main.js" }}
+{{ with resources.Get "js/main.js" }}
     {{ if hugo.IsDevelopment }}
       <script src="{{ .RelPermalink }}"></script>
     {{ else }}

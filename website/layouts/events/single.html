@@ -108,9 +108,9 @@
         {{ $eventId := .Params.recurringEventId | default .Params.id }}
         {{ $issueURL := printf "%s/issues/new?template=event-image.yml&title=%s&event_id=%s" site.Params.repoURL
         (.Params.summary | urlquery) ($eventId | urlquery) }}
-        <div class="text-center mb-8 maintainer-mode hidden">
+        <div class="text-center mb-8">
           <a href="{{ $issueURL }}" target="_blank" rel="noopener noreferrer"
-            class="text-xs text-stone-400 hover:text-stone-600 no-underline hover:underline">+ Add an image</a>
+            class="text-xs text-stone-400 hover:text-stone-600 no-underline hover:underline">+ Suggest an image</a>
         </div>
 </article>
 {{ end }}

@@ -10,38 +10,6 @@ function initShareButton() {
   });
 }
 
-function toggleMaintainerMode() {
-  const enabled = localStorage.getItem("maintainerMode") === "true";
-  for (const el of document.getElementsByClassName("maintainer-mode")) {
-    el.classList.toggle("hidden", !enabled);
-  }
-}
-
-function initMaintainerMode() {
-  let taps = 0,
-    timer;
-  document.getElementById("footer-bike").addEventListener("click", function () {
-    taps++;
-    clearTimeout(timer);
-    timer = setTimeout(function () {
-      taps = 0;
-    }, 2000);
-    if (taps >= 5) {
-      taps = 0;
-      clearTimeout(timer);
-      if (localStorage.getItem("maintainerMode") === "true") {
-        if (confirm("Exit maintainer mode?")) {
-          localStorage.removeItem("maintainerMode");
-          toggleMaintainerMode();
-        }
-      } else if (confirm("Enter maintainer mode?")) {
-        localStorage.setItem("maintainerMode", "true");
-        toggleMaintainerMode();
-      }
-    }
-  });
-}
-
 function initRelativeTimeHeaders() {
   let headers = document.querySelectorAll("[data-date]");
   if (!headers.length) return;
@@ -57,6 +25,4 @@ function initRelativeTimeHeaders() {
 }
 
 initShareButton();
-initMaintainerMode();
-toggleMaintainerMode();
 initRelativeTimeHeaders();

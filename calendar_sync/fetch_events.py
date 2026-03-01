@@ -169,7 +169,7 @@ def _transform_description(description: str) -> str:
     if not description:
         return description
     if _HTML_TAG_RE.search(description):
-        return description
+        return description.replace("\n", "<br>")
     # Linkify first so newline conversion doesn't split URLs
     linked = _URL_RE.sub(
         lambda m: f'<a href="{m.group(1)}">{m.group(1)}</a>', description
